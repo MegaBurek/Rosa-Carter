@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../src/assets/styles/themes.scss";
+@import "../src/assets/styles/layout-grid.scss";
+@import "../src/assets/styles/navbar.scss";
+@import "../src/assets/styles/main-feed.scss";
+@import "../src/assets/styles/gallery.scss";
+@import "../src/assets/styles/home-shop.scss";
+
+* {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: $background;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+header{
+  margin-bottom: 5px;
+}

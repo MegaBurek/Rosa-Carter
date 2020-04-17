@@ -1,0 +1,19 @@
+@import url(//db.onlinewebfonts.com/c/cae233caae8126deb685e2a1491834b0?family=Tw+Cen+MT+Std);
+@import url(//db.onlinewebfonts.com/c/c9a2e344b85728402fb6b8e2afa7f754?family=Vivaldi);
+
+
+$background: #0D090A;
+$secondary: #d1ccdc;//russian violet
+$font: #fff;
+
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
+}
+
+html {
+  font-size: 100%;
+}

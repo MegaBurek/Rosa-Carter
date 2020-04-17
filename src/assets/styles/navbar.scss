@@ -1,0 +1,120 @@
+@import "./breakpoints.scss";
+
+.social-link {
+  width: 10%;
+}
+
+.header-content {
+  text-align: center;
+  height: 100%;
+  width: 65%;
+  .navbar-brand-title {
+    font-family: "Vivaldi";
+    margin-bottom: 0px;
+    color: $font;
+    @include for-phone-only-portrait {
+      font-size: 2.5rem;
+    }
+    @include for-phone-only-landscape {
+      font-size: 2.9rem;
+    }
+    @include for-tablet-portrait {
+      font-size: 3.2rem;
+    }
+    @include for-desktop-only {
+      font-size: 3.5rem;
+    }
+    @include for-big-desktop-up {
+      font-size: 3.8rem;
+    }
+  }
+  .navbar-brand-subtitle {
+    font-family: "Tw Cen MT Std";
+    margin-bottom: 0px;
+    color: $font;
+    @include for-phone-only-portrait {
+      font-size: 1.3rem;
+    }
+    @include for-phone-only-landscape {
+      font-size: 1.6rem;
+    }
+    @include for-tablet-portrait {
+      font-size: 1.9rem;
+    }
+    @include for-desktop-only {
+      font-size: 2.1rem;
+    }
+    @include for-big-desktop-up {
+      font-size: 2.4rem;
+    }
+  }
+}
+
+.user-links {
+  width: 10%;
+  display: flex;
+  align-content: flex-end;
+  img {
+    float: right;
+    margin: 0 10px;
+  }
+  img:hover {
+    fill: $secondary;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  @media (min-width: 768px) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.icon:hover {
+  fill: $secondary;
+}
+
+.main-nav {
+  overflow: hidden;
+  .nav-item {
+    width: 15%;
+    text-align: center;
+    a {
+      text-decoration: none;
+      font-family: "Tw Cen MT Std";
+      color: $font;
+      font-size: 1.3rem;
+      width: 100%;
+      cursor: pointer;
+      overflow: hidden;
+      @media (min-width: 768px) {
+        font-size: 1.8rem;
+      }
+      span {
+        position: relative;
+        display: inline-block;
+        transition: transform 0.3s;
+        -moz-transition: -moz-transform 0.3s;
+        -webkit-transition: -webkit-transform 0.3s;
+      }
+      span::before {
+        color: $secondary;
+        position: absolute;
+        top: 100%;
+        content: attr(data-hover);
+
+        transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+      }
+    }
+    a:hover span,
+    a:focus span {
+      transform: translateY(-100%);
+      -moz-transform: translateY(-100%);
+      -webkit-transform: translateY(-100%);
+    }
+  }
+}
