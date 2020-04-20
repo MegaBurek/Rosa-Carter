@@ -1,17 +1,30 @@
 @import "./breakpoints.scss";
 
 .social-link {
-  width: 10%;
+  width: 40px;
+}
+
+.navbar {
+  padding: 4px 0 0 0;
+  align-items: center;
 }
 
 .header-content {
   text-align: center;
-  height: 100%;
+  @include for-small-phone {
+    width: 200px;
+  }
+  @include for-phone-only-portrait {
+    width: 215px;
+  }
   width: 65%;
   .navbar-brand-title {
-    font-family: "Vivaldi";
+    font-family: "leadFont";
     margin-bottom: 0px;
     color: $font;
+    @include for-small-phone {
+      font-size: 2.2rem;
+    }
     @include for-phone-only-portrait {
       font-size: 2.5rem;
     }
@@ -29,9 +42,12 @@
     }
   }
   .navbar-brand-subtitle {
-    font-family: "Tw Cen MT Std";
+    font-family: "subFont";
     margin-bottom: 0px;
     color: $font;
+    @include for-small-phone {
+      font-size: 1rem;
+    }
     @include for-phone-only-portrait {
       font-size: 1.3rem;
     }
@@ -51,21 +67,16 @@
 }
 
 .user-links {
-  width: 10%;
-  display: flex;
-  align-content: flex-end;
-  img {
-    float: right;
-    margin: 0 10px;
-  }
-  img:hover {
-    fill: $secondary;
-  }
+  width: 40px;
 }
 
 .icon {
   width: 20px;
   height: 20px;
+  fill: #fff;
+  &:hover {
+    fill: $secondary;
+  }
   @media (min-width: 768px) {
     width: 30px;
     height: 30px;
@@ -78,12 +89,13 @@
 
 .main-nav {
   overflow: hidden;
+  height: 40px;
   .nav-item {
-    width: 15%;
+    width: 19%;
     text-align: center;
     a {
       text-decoration: none;
-      font-family: "Tw Cen MT Std";
+      font-family: "subFont";
       color: $font;
       font-size: 1.3rem;
       width: 100%;

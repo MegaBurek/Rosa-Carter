@@ -1,4 +1,4 @@
-@import './breakpoints.scss';
+@import "./breakpoints.scss";
 
 .product-image-list {
   width: 100%;
@@ -12,17 +12,17 @@
 .directional-arrow {
   width: 100%;
   height: 100%;
+  fill: #fff;
   cursor: pointer;
+  &:hover {
+    fill: $secondary;
+  }
 }
 
-.directional-arrow:hover {
-  fill: $secondary;
-}
-
-.image-slider-container{
+.image-slider-container {
   height: 100%;
-  @include for-phone-only-portrait{
-    width: 225px;
+  @include for-phone-only-portrait {
+    width: 228px;
   }
 }
 

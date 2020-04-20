@@ -12,10 +12,10 @@
 
 .gallery__item {
   overflow: hidden;
-  border-radius: 3%;
+  border-radius: 1rem;
   box-shadow: 0px 0px 5px #fff;
   margin: 0px;
-  max-height: 180px;
+  cursor: pointer;
   @include for-phone-only-portrait {
   }
   @include for-phone-only-landscape {

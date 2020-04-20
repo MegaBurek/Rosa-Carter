@@ -1,5 +1,10 @@
+@mixin for-small-phone{
+    @media (min-device-width: 300px) and (max-device-width: 350px) {
+        @content;
+    }
+}
 @mixin for-phone-only-portrait {
-    @media (min-device-width: 319px) and (max-device-width: 479px) {
+    @media (min-device-width: 351px) and (max-device-width: 479px) {
         @content;
     }
 }

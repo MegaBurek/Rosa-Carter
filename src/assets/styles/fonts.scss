@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "leadFont";
+    src: url("src/assets/fonts/Didot.ttf") format("truetype"), url("src/assets/fonts/Didot.otf") format("opentype"),
+        url("src/assets/fonts/Didot.woff") format("woff"), url("src/assets/fonts/Didot.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "subFont";
+    src: url("src/assets/fonts/TwCenMT.otf") format("opentype"), url("src/assets/fonts/TwCenMT.ttf") format("truetype"),
+        url("src/assets/fonts/TwCenMT.woff") format("woff"), url("src/assets/fonts/TwCenMT.woff2") format("woff2");
+}
