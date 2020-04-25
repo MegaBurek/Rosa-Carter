@@ -1,10 +1,14 @@
 import { Injectable } from "@angular/core";
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+import { User } from 'src/app/model/user.model';
 
 @Injectable()
 export class UserService {
+
+  userCollection: AngularFirestoreCollection<User>;
+  userDoc: AngularFirestoreDocument<User>;
 
   constructor(
    public db: AngularFirestore,
@@ -35,5 +39,15 @@ export class UserService {
         resolve(res);
       }, err => reject(err))
     })
+  }
+
+  getUsers(){
+    this.userCollection = this.db.collection('users');
+    return this.userCollection.valueChanges();
+  }
+
+  getUser(id:string){
+    this.userDoc = this.db.doc<User>('users/${id}');
+    return this.userDoc.valueChanges();
   }
 }

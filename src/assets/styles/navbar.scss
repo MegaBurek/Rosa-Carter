@@ -68,6 +68,9 @@
 
 .user-links {
   width: 40px;
+  @media screen and (min-width:767px) {
+    width: 60px;
+  }
 }
 
 .icon {

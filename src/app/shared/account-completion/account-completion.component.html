@@ -1,0 +1,42 @@
+<div class="card card-userinput mr-auto ml-auto">
+    <div class="card-body">
+        <h5 class="card-title text-center">Show us who YOU are</h5>
+        <form class="form-signin" [formGroup]="accountCompletionForm">
+            <div class="dflex flex-row">
+                <label for="input-label" style="width: 50%">Display Photo</label>
+                <label for="text" *ngIf="uploaded" style="width: 50%">✔</label>
+            </div>
+            <div class="form-label-group">
+                <input type="file" id="file" />
+                <label for="file" class="btn-2" (click)="showCheck()">Click to upload 📁</label>
+            </div>
+
+            <label for="input-label">Display Name</label>
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="displayName" type="text" required>
+            </div>
+
+            <label for="input-label">Name</label>
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="name" type="text">
+            </div>
+
+            <label for="input-label">Surname</label>
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="surname" type="text" required>
+            </div>
+
+            <label for="input-label">Date of Birth</label>
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="dob" type="date" required
+                    style="margin-bottom: 10px;">
+            </div>
+
+            <button class="btn btn-lg btn-block text-uppercase" (click)="tryRegister()">PROCEED</button>
+            <hr class="divider">
+            <blockquote class="message">
+                We're glad to have you on board 🖤
+            </blockquote>
+        </form>
+    </div>
+</div>

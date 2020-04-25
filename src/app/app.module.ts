@@ -6,6 +6,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 import { NgImageSliderModule } from 'ng-image-slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,6 +23,9 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/users/user.service';
 import { RegisterComponent } from './shared/register/register.component';
+import { AccountCompletionComponent } from './shared/account-completion/account-completion.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { DropzoneDirective } from './dropzone.directive';
 
 @NgModule({
   declarations: [
@@ -29,19 +35,25 @@ import { RegisterComponent } from './shared/register/register.component';
     GalleryComponent,
     HomeShopComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AccountCompletionComponent,
+    UserDetailComponent,
+    DropzoneDirective
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, 
+    AngularFireStorageModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
     NgImageSliderModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService,UserService, AuthGuard],
+  providers: [AuthService, UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

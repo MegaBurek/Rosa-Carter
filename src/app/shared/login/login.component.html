@@ -1,4 +1,4 @@
-<div class="card card-signin mr-auto ml-auto">
+<div class="card card-userinput mr-auto ml-auto">
     <div class="card-body">
         <h5 class="card-title text-center">Sign In</h5>
         <form class="form-signin" [formGroup]="loginForm">
@@ -8,9 +8,7 @@
 
             <div class="form-label-group">
                 <input class="form-control form-control-lg" formControlName="password" type="password" placeholder="Password" required style="margin-bottom: 10px;">
-                <!-- <label class="error">{{errorMessage}}</label> -->
             </div>
-            <!-- <p class="error-text">You have entered a wrong password or username</p> -->
             <button class="btn btn-lg btn-block text-uppercase" (click)="tryLogin(loginForm.value)">Enter</button>
             <hr class="divider">
             <blockquote class="quote" cite="Said no one ever">

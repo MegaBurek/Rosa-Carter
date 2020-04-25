@@ -1,1 +1,23 @@
-<p>register works!</p>
+<div class="card card-userinput mr-auto ml-auto">
+    <div class="card-body">
+        <h5 class="card-title text-center">Register</h5>
+        <form class="form-signin" [formGroup]="registerForm">
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="email" type="text" placeholder="Email" required>
+            </div>
+
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="password" type="password" placeholder="Password">
+            </div>
+
+            <div class="form-label-group">
+                <input class="form-control form-control-lg" formControlName="repassword" type="password" placeholder="Re-enter Password" required style="margin-bottom: 10px;">
+            </div>
+            <button class="btn btn-lg btn-block text-uppercase" (click)="toCompletion()">PROCEED</button>
+            <hr class="divider">
+            <blockquote class="message">
+                We need someone like YOU
+            </blockquote>
+        </form>
+    </div>
+</div>
