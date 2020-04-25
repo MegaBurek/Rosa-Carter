@@ -26,10 +26,6 @@ export class AuthService {
     })
   }
 
-  createUser(user){
-    return this.fireStore.collection('users').add(user);
-  }
-
   SetUserData(user, userInfo) {
     const userRef: AngularFirestoreDocument<any> = this.fireStore.doc(`users/${user.uid}`);
     const userData: User = {

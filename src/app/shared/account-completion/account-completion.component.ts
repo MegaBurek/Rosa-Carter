@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireUploadTask, createStorageRef } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 
@@ -19,11 +19,10 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
   uploaded: boolean = false;
   productImage: string = '';
   productGallery: string[] = [];
-  file: File;
 
   task: AngularFireUploadTask;
   snapshot: Observable<any>;
-  downloadURL: string[] = JSON.parse(localStorage.getItem("imgURL"));
+  downloadURL: string[] = [];
 
   constructor(
     private router: Router,
@@ -88,33 +87,30 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
     }
     else {
       let userInfo = {};
-      if (typeof (FileReader) !== 'undefined') {
-        const reader = new FileReader();
-
-        reader.onload = (e: any) => {
-          this.file = e.target.result;
-        };
-        reader.readAsArrayBuffer(inputNode.files[0]);
-        this.startImageupload(this.file);
+      let file: File = inputNode.files[0];
+      let filePath: string = '';
+      if(this.startImageupload(file) == ''){
+        this.toastr.error("There was an issue uploading your image", "Notification", {
+          timeOut: 1200
+        })
       }
-
-      this.productGallery = JSON.parse(localStorage.getItem("imgURL"));
-
-      this.productImage = this.productGallery[0];
+      else{
+        filePath = this.startImageupload(file);
+      }
 
       let email = localStorage.getItem('email')
       let password = localStorage.getItem('password')
 
-
-      userInfo['imageUrl'] = this.productImage;
       userInfo['displayName'] = this.f.displayName.value;
       userInfo['name'] = this.f.name.value;
       userInfo['surname'] = this.f.surname.value;
       userInfo['dob'] = this.f.dob.value;
+      userInfo['role'] = 'user';
+      userInfo['imageUrl'] = filePath;
 
       this.authService.doRegister(email, password, userInfo);
       this.toastr.success("Welcome to Rosa Carter", "Notification", {
-        timeOut: 1200
+        timeOut: 1700
       })
       localStorage.clear();
       this.router.navigate(['/login']);
@@ -125,24 +121,14 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
 
   startImageupload(file) {
 
-    const path = `public/images/profile_photos/${Date.now()}_${file.name}`;
-    console.log("the name is" + file.name)
+    const pathToUpload = `public/images/profile_photos/${Date.now()}_${file.name}`;
 
-    const ref = this.storage.ref(path);
+    const ref = this.storage.ref(pathToUpload);
 
-    this.task = this.storage.upload(path, file);
+    ref.getDownloadURL.toString
 
-    this.snapshot = this.task.snapshotChanges().pipe(
-      tap(console.log),
-      finalize(async () => {
-        this.downloadURL.push(await ref.getDownloadURL().toPromise());
-        console.log(this.downloadURL);
-        localStorage.setItem('imgURL', JSON.stringify(this.downloadURL));
-
-        this.db.collection('files').add({ downloadURL: this.downloadURL, path });
-
-      }),
-    );
+    this.task = this.storage.upload(pathToUpload, file);
+    return pathToUpload;
   }
 
 }

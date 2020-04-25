@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, data: { animation: { value: 'RegisterPage' }}},
   { path: 'home', component: MainFeedComponent, data: { animation: { value: 'HomePage' }}},
   { path: 'accountCompletion', component:AccountCompletionComponent, data: { animation: { value: 'accountCompletionPage' }}},
-  { path: 'userDetail/:id', component: UserDetailComponent, data: { animation: { value: 'MyHomePage' }},canActivate: [AuthGuard] }
+  { path: 'userDetail', component: UserDetailComponent, data: { animation: { value: 'MyHomePage' }},canActivate: [AuthGuard] }
 ];
 
 @NgModule({

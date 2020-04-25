@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
 
   createLoginForm(){
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required, Validators.email],
-      password: ['',Validators.required]
+      email: [''],
+      password: ['']
     });
   }
 
@@ -43,7 +43,8 @@ export class LoginComponent implements OnInit {
       this.toastr.success("You have succesfully logged in","Notification",{
         timeOut: 1200
       })
-      this.router.navigate(['/myHome']);
+      localStorage.setItem('uid',this.authService.getLoggedInID())
+      this.router.navigate(['/userDetail']);
     }, err => {
       console.log(err);
       this.errorMessage = err.message;

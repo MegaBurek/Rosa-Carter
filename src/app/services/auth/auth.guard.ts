@@ -13,15 +13,11 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(): Promise<boolean>{
-    return new Promise((resolve, reject) => {
-      this.userService.getCurrentUser()
-      .then(user => {
-        this.router.navigate(['/user']);
-        return resolve(false);
-      }, err => {
-        return resolve(true);
-      })
-    })
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    const authorized = localStorage.getItem('uid');
+    if (authorized) {
+      return true;
+    }
   }
+
 }
