@@ -1,0 +1,37 @@
+.menu-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+}
+
+.menu-button{
+    width: 50%;
+    height: inhe;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-btn-title{
+    font-size: 1.2rem;
+    font-family: "subFont";
+    text-align: center;
+}
+
+.menu-btn-icon{
+    height: 60px;
+    width: 60px;
+    &:hover{
+        fill: $tertiary;
+    }
+}
+
+.menu-btn-link{
+    text-align: center;
+    color: black;
+    height: inherit;
+}

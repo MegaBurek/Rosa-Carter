@@ -66,8 +66,12 @@ export class AuthService {
     });
   }
 
-  getLoggednIn(){
-    return firebase.auth().currentUser;
+  isLoggedIn(){
+    let user = firebase.auth().currentUser;
+    if(user != null){
+      return true;
+    }
+    return false;
   }
 
   getLoggedInID(){

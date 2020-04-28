@@ -1,14 +1,16 @@
 @import "../src/assets/styles/themes.scss";
-@import "../src/assets/styles/layout-grid.scss";
 @import "../src/assets/styles/navbar.scss";
 @import "../src/assets/styles/main-feed.scss";
 @import "../src/assets/styles/gallery.scss";
 @import "../src/assets/styles/home-shop.scss";
-@import "../src/assets/styles/login.scss";
-@import "../src/assets/styles/register.scss";
+@import "../src/assets/styles/card.scss";
 @import "../src/assets/styles/fonts.scss";
 @import "../src/assets/styles/toaster.scss";
 @import "../src/assets/styles/user-detail.scss";
+@import "../src/assets/styles/anchorRoute.scss";
+@import "../src/assets/styles/new-members.scss";
+@import "../src/assets/styles/shop-cart.scss";
+@import "../src/assets/styles/dashboard.scss";
 
 * {
   width: 100%;
@@ -28,6 +30,10 @@ body {
   min-height: 100%;
 }
 
-header{
+html {
+  scroll-behavior: smooth;
+}
+
+header {
   margin-bottom: 5px;
 }

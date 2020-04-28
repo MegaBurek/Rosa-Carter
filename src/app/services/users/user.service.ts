@@ -10,6 +10,8 @@ export class UserService {
   userCollection: AngularFirestoreCollection<User>;
   userDoc: AngularFirestoreDocument<User>;
 
+  user: User = new User;
+
   constructor(
    public db: AngularFirestore,
    public afAuth: AngularFireAuth

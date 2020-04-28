@@ -6,6 +6,9 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { RegisterComponent } from './shared/register/register.component';
 import { AccountCompletionComponent } from './shared/account-completion/account-completion.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ShopCartComponent } from './shop-cart/shop-cart.component';
+import { AddProductComponent } from './dashboard/add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -14,7 +17,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, data: { animation: { value: 'RegisterPage' }}},
   { path: 'home', component: MainFeedComponent, data: { animation: { value: 'HomePage' }}},
   { path: 'accountCompletion', component:AccountCompletionComponent, data: { animation: { value: 'accountCompletionPage' }}},
-  { path: 'userDetail', component: UserDetailComponent, data: { animation: { value: 'MyHomePage' }},canActivate: [AuthGuard] }
+  { path: 'shopping-cart', component:ShopCartComponent, data: { animation: { value: 'shopcartPage' }}},
+  { path: 'myProfile', component: UserDetailComponent, data: { animation: { value: 'MyHomePage' }},canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, data: { animation: {value: 'DashboardPage'}}, canActivate: [AuthGuard]},
+  { path: 'addProduct', component: AddProductComponent, data: { animation: {value: 'AddProductPage'}}, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

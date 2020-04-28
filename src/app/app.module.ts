@@ -26,6 +26,13 @@ import { RegisterComponent } from './shared/register/register.component';
 import { AccountCompletionComponent } from './shared/account-completion/account-completion.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DropzoneDirective } from './dropzone.directive';
+import { BrasComponent } from './shared/bras/bras.component';
+import { UndiesComponent } from './shared/undies/undies.component';
+import { SetsComponent } from './shared/sets/sets.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewMembersComponent } from './dashboard/new-members/new-members.component';
+import { ShopCartComponent } from './shop-cart/shop-cart.component';
+import { AddProductComponent } from './dashboard/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +45,14 @@ import { DropzoneDirective } from './dropzone.directive';
     RegisterComponent,
     AccountCompletionComponent,
     UserDetailComponent,
-    DropzoneDirective
+    DropzoneDirective,
+    BrasComponent,
+    UndiesComponent,
+    SetsComponent,
+    DashboardComponent,
+    NewMembersComponent,
+    ShopCartComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

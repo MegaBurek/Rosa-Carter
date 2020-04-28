@@ -40,10 +40,7 @@ export class HomeShopComponent implements OnInit {
       }, {
         image: '../../../assets/content/13.jpg',
         thumbImage: '../../../assets/content/13.jpg'
-      }, {
-        image: '../../../assets/content/14.jpg',
-        thumbImage: '../../../assets/content/14.jpg'
-      }, {
+      },{
         image: '../../../assets/content/15.jpg',
         thumbImage: '../../../assets/content/15.jpg'
       }];

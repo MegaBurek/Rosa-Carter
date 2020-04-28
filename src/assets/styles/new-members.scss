@@ -1,0 +1,26 @@
+.new-member-container{
+    height: 90px;
+    background-color: $component;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.new-member{
+    width: 20%;
+    height: inherit;
+}
+
+.img-member{
+    border-radius: 1rem;
+    object-fit: fill;
+    box-shadow: 0px 0px 5px $background;
+}
+
+.member-name{
+    text-align: center;
+    font-family: "subFont";
+    margin: 0;
+}

@@ -1,4 +1,4 @@
-<div class="nav-wrapper container d-flex flex-column">
+<div class="nav-wrapper d-flex flex-column">
     <nav class="navbar navbar-expand-md flex-row justify-content-around">
         <div class="social-link">
             <a href="https://www.instagram.com/therosacarter/" title="Rosa Catrer on Instagram">
@@ -28,7 +28,7 @@
         </div>
 
         <div class="user-links">
-            <a href="/shopping-cart" title="Shopping Cart">
+            <a routerLink="/shopping-cart" title="Shopping Cart">
                 <svg class="icon" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 512 512">
                     <g>
                         <g>
@@ -48,7 +48,7 @@
                     </g>
                 </svg>
             </a>
-            <a href="/account" title="Account">
+            <a routerLink="/myProfile" title="Account">
                 <svg class="icon" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 512 512">
                     <g>
                         <path
@@ -62,18 +62,24 @@
             </a>
         </div>
     </nav>
-    <ul class="navbar-nav main-nav d-flex flex-row justify-content-around">
+    <ul class="navbar-nav main-nav d-flex flex-row justify-content-around" *ngIf="isLoggedIn()">
         <li class="nav-item">
-            <a class="nav-link" href="/new-arrivals"><span data-hover="NEW" class="link-text">NEW</span></a>
+            <a class="nav-link" href="#bras"><span data-hover="BRAS" class="link-text">BRAS</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/bras"><span data-hover="BRAS" class="link-text">BRAS</span></a>
+            <a class="nav-link" href="#undies"><span data-hover="UNDIES" class="link-text">UNDIES</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/undies"><span data-hover="UNDIES" class="link-text">UNDIES</span></a>
+            <a class="nav-link" href="#sets"><span data-hover="SETS" class="link-text">SETS</span></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav main-nav d-flex flex-row justify-content-around" *ngIf="!isLoggedIn()">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/login"><span data-hover="LOGIN" class="link-text">LOGIN</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/sets"><span data-hover="SETS" class="link-text">SETS</span></a>
+            <a class="nav-link" routerLink="/register"><span data-hover="REGISTER" class="link-text">REGISTER</span></a>
         </li>
     </ul>
 </div>

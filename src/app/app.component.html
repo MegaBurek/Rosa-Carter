@@ -1,6 +1,6 @@
-<header>
+<header class="container">
     <app-navigation-bar></app-navigation-bar>
 </header>
-<main class="container m-auto" role="main">
-    <router-outlet></router-outlet>
+<main [@routerAnimations]="prepareRouteTransition(outlet)"  class="container m-auto" role="main">
+    <router-outlet #outlet="outlet"></router-outlet>
 </main>
