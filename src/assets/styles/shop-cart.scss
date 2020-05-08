@@ -1,3 +1,17 @@
+.nav-back {
+    width: 30px;
+    &:hover {
+        fill: $secondary;
+    }
+}
+
+.title-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .shop-cart-container {
     list-style: none;
     display: flex;
@@ -27,7 +41,7 @@
 }
 
 .shop-cart-link {
-    width: 30px;
+    width: 40px;
     margin-left: 5px;
     &:hover {
         fill: $secondary;

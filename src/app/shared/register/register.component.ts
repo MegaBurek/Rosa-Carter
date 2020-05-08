@@ -40,7 +40,12 @@ export class RegisterComponent implements OnInit{
 
   toCompletion() {
     this.password = this.f.password.value;
-    if (!this.validateEmail(this.f.email.value)) {
+    if (this.f.email.value == '') {
+      this.toastr.error("Please enter password", "Notification", {
+        timeOut: 1700
+      })
+    }
+    else if (!this.validateEmail(this.f.email.value)) {
       this.toastr.error("Your email is invalid", "Notification", {
         timeOut: 1700
       })
@@ -61,7 +66,7 @@ export class RegisterComponent implements OnInit{
       })
     }
     else if (this.password.length < 6){
-      this.toastr.error("Your password must be more than 6 letters", "Notification", {
+      this.toastr.error("Your password must be more than 6 characters", "Notification", {
         timeOut: 1700
       })
     }

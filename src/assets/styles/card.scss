@@ -147,3 +147,8 @@ label {
 		overflow: hidden;
 	}
 }
+
+input[type="checkbox"], input[type="radio"] {
+	cursor: pointer;
+	border-radius: 7px;
+}

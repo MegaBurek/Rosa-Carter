@@ -10,7 +10,7 @@ import { Product } from '../model/product';
 })
 export class ShopCartComponent implements OnInit {
 
-  products: Product[] = [];
+  products = PRODUCTS;
   total:number = 1200;
 
   constructor(

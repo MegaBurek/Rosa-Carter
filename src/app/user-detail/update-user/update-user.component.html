@@ -1,0 +1,49 @@
+<div class="card card-userinput mr-auto ml-auto">
+    <div class="card-body">
+        <div class="wrapper">
+            <h5 class="card-title text-center" style="margin: 0;">Edit Profile</h5>
+            <form class="form-signin">
+                <div class="dflex flex-row">
+                    <label for="input-label" style="width: 50%">Display Photo</label>
+                    <label for="text" *ngIf="uploaded" style="width: 50%">✔</label>
+                </div>
+                <div class="form-label-group">
+                    <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" />
+                    <label for="file" class="btn-2" (click)="showCheck()">Click to upload 📁</label>
+                </div>
+                <p stlye="font-size: 0.8rem;" class="text-center">You can leave this out if you want to keep your current image</p>
+
+                <label for="input-label">Email</label>
+                <div class="form-label-group">
+                    <input class="form-control form-control-lg" name="email" [(ngModel)]="user.email" type="text"
+                        required>
+                </div>
+
+                <label for="input-label">Display Name</label>
+                <div class="form-label-group">
+                    <input class="form-control form-control-lg" name="displayName" [(ngModel)]="user.displayName"
+                        type="text" required>
+                </div>
+
+                <label for="input-label">Name</label>
+                <div class="form-label-group">
+                    <input class="form-control form-control-lg" name="name" [(ngModel)]="user.name" type="text">
+                </div>
+
+                <label for="input-label">Surname</label>
+                <div class="form-label-group">
+                    <input class="form-control form-control-lg" name="surname" [(ngModel)]="user.surname" type="text"
+                        required>
+                </div>
+
+                <label for="input-label">Date of Birth</label>
+                <div class="form-label-group">
+                    <input class="form-control form-control-lg" name="dob" [(ngModel)]="user.dob" type="date" required
+                        style="margin-bottom: 10px;">
+                </div>
+
+                <button class="btn btn-lg btn-block text-uppercase" (click)="tryEdit()">EDIT</button>
+            </form>
+        </div>
+    </div>
+</div>

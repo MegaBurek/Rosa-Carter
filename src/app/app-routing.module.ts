@@ -9,6 +9,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component';
 import { AddProductComponent } from './dashboard/add-product/add-product.component';
+import { OrderListComponent } from './dashboard/order-list/order-list.component';
+import { UpdateUserComponent } from './user-detail/update-user/update-user.component';
 
 
 const routes: Routes = [
@@ -19,8 +21,10 @@ const routes: Routes = [
   { path: 'accountCompletion', component:AccountCompletionComponent, data: { animation: { value: 'accountCompletionPage' }}},
   { path: 'shopping-cart', component:ShopCartComponent, data: { animation: { value: 'shopcartPage' }}},
   { path: 'myProfile', component: UserDetailComponent, data: { animation: { value: 'MyHomePage' }},canActivate: [AuthGuard] },
+  { path: 'editProfile', component: UpdateUserComponent, data: { animation: { value: 'EditProfilePage' }},canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, data: { animation: {value: 'DashboardPage'}}, canActivate: [AuthGuard]},
-  { path: 'addProduct', component: AddProductComponent, data: { animation: {value: 'AddProductPage'}}, canActivate: [AuthGuard]}
+  { path: 'addProduct', component: AddProductComponent, data: { animation: {value: 'AddProductPage'}}, canActivate: [AuthGuard]},
+  { path: 'currentOrders', component: OrderListComponent, data: { animation: {value: 'OrderListPage'}}, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

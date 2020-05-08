@@ -1,0 +1,81 @@
+<div class="card card-userinput mr-auto ml-auto">
+    <div class="card-body">
+        <div class="wrapper">
+            <div class="title-box">
+                <a style="width: 40px;" routerLink="/dashboard">
+                    <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                        style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
+			c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
+			c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
+			L313.749,347.584z" />
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                <h5 class="card-title text-center" style="margin-bottom: 0;">$$$</h5>
+                <a style="width: 40px;">
+                    <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                        style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
+			c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
+			c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
+			L313.749,347.584z" fill="#f7f7f2" />
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+            <hr class="divider-main"
+                style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));margin-bottom: 20px;margin-top: 0;">
+            <ul class="shop-cart-container container">
+                <li class="shop-item" *ngFor="let product of products">
+                    <img src="../../../assets/me.jpg" class="img-product" alt="">
+                    <p class="product-info">
+                        {{product.name}}
+                        <br />
+                        P{{product.price}}.00
+                    </p>
+                    <a href="" class="shop-cart-link" title="View order">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 461.312 461.312"
+                            style="enable-background:new 0 0 461.312 461.312;" xml:space="preserve">
+                            <g>
+                                <g>
+                                    <path d="M230.656,156.416c-40.96,0-74.24,33.28-74.24,74.24s33.28,74.24,74.24,74.24s74.24-33.28,74.24-74.24
+			S271.616,156.416,230.656,156.416z M225.024,208.64c-9.216,0-16.896,7.68-16.896,16.896h-24.576
+			c0.512-23.04,18.944-41.472,41.472-41.472V208.64z" />
+                                </g>
+                            </g>
+                            <g>
+                                <g>
+                                    <path d="M455.936,215.296c-25.088-31.232-114.688-133.12-225.28-133.12S30.464,184.064,5.376,215.296
+			c-7.168,8.704-7.168,21.504,0,30.72c25.088,31.232,114.688,133.12,225.28,133.12s200.192-101.888,225.28-133.12
+			C463.104,237.312,463.104,224.512,455.936,215.296z M230.656,338.176c-59.392,0-107.52-48.128-107.52-107.52
+			s48.128-107.52,107.52-107.52s107.52,48.128,107.52,107.52S290.048,338.176,230.656,338.176z" />
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                    <a href="" class="shop-cart-link" title="Download order">
+                        <svg id="bold" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m12 16c-.205 0-.401-.084-.542-.232l-5.25-5.5c-.455-.476-.117-1.268.542-1.268h2.75v-5.75c0-.689.561-1.25 1.25-1.25h2.5c.689 0 1.25.561 1.25 1.25v5.75h2.75c.659 0 .997.792.542 1.268l-5.25 5.5c-.141.148-.337.232-.542.232z" />
+                            <path
+                                d="m22.25 22h-20.5c-.965 0-1.75-.785-1.75-1.75v-.5c0-.965.785-1.75 1.75-1.75h20.5c.965 0 1.75.785 1.75 1.75v.5c0 .965-.785 1.75-1.75 1.75z" />
+                        </svg>
+
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

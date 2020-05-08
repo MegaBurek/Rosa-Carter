@@ -33,6 +33,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewMembersComponent } from './dashboard/new-members/new-members.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component';
 import { AddProductComponent } from './dashboard/add-product/add-product.component';
+import { OrderListComponent } from './dashboard/order-list/order-list.component';
+import { UpdateUserComponent } from './user-detail/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { AddProductComponent } from './dashboard/add-product/add-product.compone
     DashboardComponent,
     NewMembersComponent,
     ShopCartComponent,
-    AddProductComponent
+    AddProductComponent,
+    OrderListComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

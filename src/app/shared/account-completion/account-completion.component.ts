@@ -3,10 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage, AngularFireUploadTask, createStorageRef } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { tap, finalize } from 'rxjs/operators';
+import { ImageUtilService } from 'src/app/services/util/image-util.service';
 
 @Component({
   selector: 'app-account-completion',
@@ -17,20 +14,14 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
 
   accountCompletionForm: FormGroup;
   uploaded: boolean = false;
-  productImage: string = '';
-  productGallery: string[] = [];
-
-  task: AngularFireUploadTask;
-  snapshot: Observable<any>;
-  downloadURL: string[] = [];
+  progress: number = 0;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private imgSerivce: ImageUtilService
   ) {
     this.createCompletionForm();
   }
@@ -88,15 +79,8 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
     else {
       let userInfo = {};
       let file: File = inputNode.files[0];
-      let filePath: string = '';
-      if(this.startImageupload(file) == ''){
-        this.toastr.error("There was an issue uploading your image", "Notification", {
-          timeOut: 1200
-        })
-      }
-      else{
-        filePath = this.startImageupload(file);
-      }
+      let pathToDownload: string =  this.imgSerivce.startImageupload(file);
+
 
       let email = localStorage.getItem('email')
       let password = localStorage.getItem('password')
@@ -106,29 +90,17 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
       userInfo['surname'] = this.f.surname.value;
       userInfo['dob'] = this.f.dob.value;
       userInfo['role'] = 'user';
-      userInfo['imageUrl'] = filePath;
+      userInfo['imageUrl'] = pathToDownload;
 
       this.authService.doRegister(email, password, userInfo);
+      this.authService.doLogout();
       this.toastr.success("Welcome to Rosa Carter", "Notification", {
         timeOut: 1700
       })
-      localStorage.clear();
       this.router.navigate(['/login']);
 
     }
 
-  }
-
-  startImageupload(file) {
-
-    const pathToUpload = `public/images/profile_photos/${Date.now()}_${file.name}`;
-
-    const ref = this.storage.ref(pathToUpload);
-
-    ref.getDownloadURL.toString
-
-    this.task = this.storage.upload(pathToUpload, file);
-    return pathToUpload;
   }
 
 }

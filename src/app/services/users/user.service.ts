@@ -43,6 +43,24 @@ export class UserService {
     })
   }
 
+  updateCurrentUserEmail(value){
+    return new Promise<any>((resolve, reject) => {
+      var user = firebase.auth().currentUser;
+      user.updateEmail(value).then(res => {
+        resolve(res);
+      }, err => reject(err))
+    })
+  }
+
+  updateCurrentUserPassword(value){
+    return new Promise<any>((resolve, reject) => {
+      var user = firebase.auth().currentUser;
+      user.updatePassword(value).then(res => {
+        resolve(res);
+      }, err => reject(err))
+    })
+  }
+
   getUsers(){
     this.userCollection = this.db.collection('users');
     return this.userCollection.valueChanges();

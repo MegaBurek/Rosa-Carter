@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { User } from '../model/user.model';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/users/user.service';
-import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
+import { AngularFireStorage} from '@angular/fire/storage';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-detail',
@@ -13,14 +13,28 @@ export class UserDetailComponent implements OnInit {
 
   user: User = new User;
   imageUrl: string = '';
+  edit: boolean = false;
+  editForm: FormGroup;
 
 
   constructor(
     private userService: UserService,
-    private storage: AngularFireStorage
-  ) { }
+    private storage: AngularFireStorage,
+    private formBuilder: FormBuilder
+  ) {
+    this.createEditForm();
+   }
 
-  ngOnInit(){
+  createEditForm() {
+    this.editForm = this.formBuilder.group({
+      displayName: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      dob: ['', Validators.required]
+    })
+  }
+
+  ngOnInit() {
     this.userService.getUser(localStorage.getItem('uid')).subscribe(actionArray => {
       this.user.displayName = actionArray.payload.get('displayName');
       this.user.email = actionArray.payload.get('email');
@@ -32,12 +46,12 @@ export class UserDetailComponent implements OnInit {
 
       this.loadImage(actionArray.payload.get('imageUrl'))
     });
-    
+
   }
 
-  loadImage(imageUrl){
+  loadImage(imageUrl) {
     let storageRef = this.storage.ref(imageUrl);
-    storageRef.getDownloadURL().subscribe(url =>{
+    storageRef.getDownloadURL().subscribe(url => {
       url = this.imageUrl = url;
     })
   }
