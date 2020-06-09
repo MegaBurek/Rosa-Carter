@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, animate, style, group, animateChild, query, stagger, transition } from '@angular/animations';
-import { RouterOutlet } from '@angular/router';
 
 const fade = [
-  query(':self', 
+  query(':self',
     [
       style({ opacity: 0 })
-    ], 
+    ],
     { optional: true }
   ),
 
@@ -14,7 +13,7 @@ const fade = [
     [
       style({ opacity: 0 }),
       animate('.7s ease-in', style({ opacity: 1 }))
-    ], 
+    ],
     { optional: true }
   )
 ];
@@ -31,11 +30,19 @@ const fade = [
 })
 
 
-export class AppComponent {
-  title = 'Rosa-Carter';
+export class AppComponent implements OnInit{
+
+
+  constructor(
+  ){}
+
+  ngOnInit(): void {
+  }
+
 
   prepareRouteTransition(outlet) {
     const animation = outlet.activatedRouteData['animation'] || {};
     return animation['value'] || null;
   }
+
 }

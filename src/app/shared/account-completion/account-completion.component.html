@@ -4,16 +4,12 @@
         <form class="form-signin" [formGroup]="accountCompletionForm">
             <div class="dflex flex-row">
                 <label for="input-label" style="width: 50%">Display Photo</label>
-                <label for="text" *ngIf="uploaded" style="width: 50%">✔</label>
-                <div class="progress form-group" *ngIf="progress > 0">
-                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
-                    </div>
-                </div>
+                <label for="text" style="width: 50%" *ngIf="check">✔</label>
             </div>
             <div class="form-label-group">
                 <input type="file" id="file"
-                    accept="image/jpeg,image/png,.jpeg,.jpg,.png" />
-                <label for="file" class="btn-2" (click)="showCheck()">Click to upload 📁</label>
+                    accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
+                <label for="file" class="btn-2">Click to upload 📁</label>
             </div>
 
             <label for="input-label">Display Name</label>

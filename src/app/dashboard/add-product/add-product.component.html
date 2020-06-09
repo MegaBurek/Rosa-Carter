@@ -1,60 +1,76 @@
 <div class="card card-userinput mr-auto ml-auto">
-    <div class="card-body">
-        <div class="wrapper">
-            <div class="title-box">
-                <a style="width: 40px;" routerLink="/dashboard">
-                    <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                        style="enable-background:new 0 0 512 512;" xml:space="preserve">
+  <div class="card-body">
+    <div class="wrapper">
+      <div class="title-box">
+        <a style="width: 40px;" routerLink="/dashboard">
+          <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+               style="enable-background:new 0 0 512 512;" xml:space="preserve" style="cursor: pointer;">
                         <g>
                             <g>
                                 <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
 			c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
 			c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
-			L313.749,347.584z" />
+			L313.749,347.584z"/>
                             </g>
                         </g>
                     </svg>
-                </a>
-                <h5 class="card-title text-center" style="margin-bottom: 0;">Inspire</h5>
-                <a style="width: 40px;">
-                    <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                        style="enable-background:new 0 0 512 512;" xml:space="preserve">
+        </a>
+        <h5 class="card-title text-center" style="margin-bottom: 0;">Inspire</h5>
+        <a style="width: 40px;">
+          <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+               style="enable-background:new 0 0 512 512;" xml:space="preserve">
                         <g>
                             <g>
                                 <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
 			c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
 			c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
-			L313.749,347.584z" fill="#f7f7f2" />
+			L313.749,347.584z" fill="#f7f7f2"/>
                             </g>
                         </g>
                     </svg>
-                </a>
-            </div>
-            <hr class="divider-main"
-                style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));margin-bottom: 20px;margin-top: 0;">
-            <form class="form-signin">
-                <label for="input-label">Image/Images</label>
-                <div class="form-label-group" style="margin-bottom: 10px;">
-                    <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" />
-                    <label for="file" class="btn-2">Click to upload 📁</label>
-                </div>
-                <label for="input-label">Name</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" formControlName="name" type="text" required>
-                </div>
-                <label for="input-label">Description</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" formControlName="description" type="text" required>
-                </div>
-                <label for="input-label">Price</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" formControlName="price" type="text" required
-                        style="margin-bottom: 10px;">
-                </div>
-                <button class="btn btn-lg btn-block text-uppercase">PROCEED</button>
-            </form>
+        </a>
+      </div>
+      <hr class="divider-main"
+          style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));margin-bottom: 20px;margin-top: 0;">
+      <form class="form-signin">
+        <div class="dflex flex-row">
+          <label for="input-label" style="width: 20%">Image</label>
+          <label for="text" style="width: 10%" *ngIf="check">✔</label>
         </div>
+        <div class="form-label-group" style="margin-bottom: 10px;">
+          <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
+          <label for="file" class="btn-2">Click to upload 📁</label>
+        </div>
+        <div *ngIf="percentage | async as pct" style="border-radius: 1rem">
+          <progress [value]="pct" max="100"></progress>
+          {{ pct | number }}%
+        </div>
+        <label for="input-label">Name</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg"  name="name" [(ngModel)]="newProduct.name" type="text" required>
+        </div>
+        <label for="input-label">Type</label>
+        <div class="form-label-group">
+          <select class="form-control form-control-lg"  name="type" [(ngModel)]="newProduct.type" type="text" required>
+            <option>Bra</option>
+            <option>Undies</option>
+            <option>Set</option>
+          </select>
+        </div>
+        <label for="input-label">Description</label>
+        <div class="form-label-group">
+          <textarea class="form-control form-control-lg"  name="desc" [(ngModel)]="newProduct.desc" type="text" required>
+          </textarea>
+        </div>
+        <label for="input-label">Price</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg"  type="text" required name="price" [(ngModel)]="newProduct.price"
+                 style="margin-bottom: 10px;">
+        </div>
+        <button class="btn btn-lg btn-block text-uppercase" (click)="handleAddProduct()">PROCEED</button>
+      </form>
     </div>
+  </div>
 </div>

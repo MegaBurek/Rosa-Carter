@@ -5,12 +5,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-
-import { NgImageSliderModule } from 'ng-image-slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ToastrModule } from 'ngx-toastr';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { NgxsModule } from '@ngxs/store';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,15 +27,22 @@ import { RegisterComponent } from './shared/register/register.component';
 import { AccountCompletionComponent } from './shared/account-completion/account-completion.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DropzoneDirective } from './dropzone.directive';
-import { BrasComponent } from './shared/bras/bras.component';
-import { UndiesComponent } from './shared/undies/undies.component';
-import { SetsComponent } from './shared/sets/sets.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewMembersComponent } from './dashboard/new-members/new-members.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component';
 import { AddProductComponent } from './dashboard/add-product/add-product.component';
 import { OrderListComponent } from './dashboard/order-list/order-list.component';
 import { UpdateUserComponent } from './user-detail/update-user/update-user.component';
+import { BraListComponent } from './shared/bra-list/bra-list.component';
+import { UndiesListComponent } from './shared/undies-list/undies-list.component';
+import { SetsListComponent } from './shared/sets-list/sets-list.component';
+import { ProductDetailComponent } from './shared/product-detail/product-detail.component';
+import {ProductState} from "./store/product/product.state";
+import { UserState } from "./store/user/user.state";
+import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
+import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+import {ProductsService} from "./services/products/products.service";
+
 
 @NgModule({
   declarations: [
@@ -48,15 +56,16 @@ import { UpdateUserComponent } from './user-detail/update-user/update-user.compo
     AccountCompletionComponent,
     UserDetailComponent,
     DropzoneDirective,
-    BrasComponent,
-    UndiesComponent,
-    SetsComponent,
     DashboardComponent,
     NewMembersComponent,
     ShopCartComponent,
     AddProductComponent,
     OrderListComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    BraListComponent,
+    UndiesListComponent,
+    SetsListComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +78,15 @@ import { UpdateUserComponent } from './user-detail/update-user/update-user.compo
     AngularFireAuthModule,
     NgImageSliderModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxsModule.forRoot([
+      ProductState,
+      UserState
+    ]),
+    NgxsStoragePluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot()
   ],
-  providers: [AuthService, UserService, AuthGuard],
+  providers: [AuthService, UserService, AuthGuard, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PRODUCTS } from "./mock-products";
-import { ShopCartService } from "../services/shop-cart/shop-cart.service";
-import { Product } from '../model/product';
+import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-shop-cart',
@@ -10,22 +8,12 @@ import { Product } from '../model/product';
 })
 export class ShopCartComponent implements OnInit {
 
-  products = PRODUCTS;
-  total:number = 1200;
 
-  constructor(
-    private shopCartService: ShopCartService) { }
-
-  ngOnInit(): void {
+  constructor() {
   }
 
-  removeFromCart(product){
-    this.shopCartService.removeFromCart(product);
-    this.getCart(); 
+  ngOnInit():void {
   }
 
-  getCart(){
-    this.products = this.shopCartService.getItems();
-  }
 
 }

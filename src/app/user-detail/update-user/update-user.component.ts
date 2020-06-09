@@ -15,20 +15,24 @@ import { Router } from '@angular/router';
 export class UpdateUserComponent implements OnInit {
 
   user: User = new User;
-  imageUrl: string = '';
-  uploaded: boolean = false;
+  check = false;
+  imageUrl = '';
+  selectedFile: File;
 
   constructor(
     private userService: UserService,
-    private storage: AngularFireStorage,
     private toastr: ToastrService,
+    private storage: AngularFireStorage,
     private db: AngularFirestore,
     private imgService: ImageUtilService,
     private router: Router
   ) { }
 
-  showCheck() {
-    this.uploaded = true;
+  onFileSelected(event) {
+    this.selectedFile = <File>event.target.files[0];
+    if (this.selectedFile != null) {
+      this.check = true;
+    }
   }
 
   ngOnInit(): void {
@@ -40,7 +44,6 @@ export class UpdateUserComponent implements OnInit {
       this.user.name = actionArray.payload.get('name');
       this.user.surname = actionArray.payload.get('surname');
       this.user.role = actionArray.payload.get('role');
-
       this.loadImage(actionArray.payload.get('imageUrl'))
     });
   }
@@ -90,20 +93,27 @@ export class UpdateUserComponent implements OnInit {
         this.db.doc(`users/${localStorage.getItem('uid')}`).update(userInfo);
         this.showSuccess();
       }
-      else {
-        let file: File = inputNode.files[0];
-        let pathToDownload: string = this.imgService.startImageupload(file);
-
-        let pathToImage = `public/images/profile_photos/${this.imageUrl}`
-        let imageRef = this.storage.ref(pathToImage);
-        imageRef.delete().subscribe(function () {
-          console.log('file-deleted')
-        })
-        userInfo['imageUrl'] = pathToDownload;
-        this.db.doc(`users/${this.user.uid}`).update(userInfo);
-        this.showSuccess();
-      }
+      // else {
+      //   let file: File = inputNode.files[0];
+      //   // let pathToDownload: string = this.imgService.startImageupload(file);
+      //   userInfo['imageUrl'] = pathToDownload;
+      //   this.imgService.deleteImage(this.imageUrl);
+      //   this.db.doc(`users/${localStorage.getItem('uid')}`).update(userInfo);
+      //   this.showSuccess();
+      // }
     }
+  }
+
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  showSuccess() {
+    this.toastr.success("You have succesfully edited your account", "Notification", {
+      timeOut: 1700
+    })
+    this.router.navigate(['/myProfile'])
   }
 
   loadImage(imageUrl) {
@@ -113,16 +123,6 @@ export class UpdateUserComponent implements OnInit {
     })
   }
 
-  validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
 
-  showSuccess(){
-    this.toastr.success("You have succesfully edited your account", "Notification", {
-      timeOut: 1700
-    })
-    this.router.navigate(['/myProfile'])
-  }
 
 }

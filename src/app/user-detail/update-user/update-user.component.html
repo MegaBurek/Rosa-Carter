@@ -5,11 +5,11 @@
             <form class="form-signin">
                 <div class="dflex flex-row">
                     <label for="input-label" style="width: 50%">Display Photo</label>
-                    <label for="text" *ngIf="uploaded" style="width: 50%">✔</label>
+                    <label for="text" style="width: 50%" *ngIf="check">✔</label>
                 </div>
                 <div class="form-label-group">
-                    <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" />
-                    <label for="file" class="btn-2" (click)="showCheck()">Click to upload 📁</label>
+                    <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
+                    <label for="file" class="btn-2">Click to upload 📁</label>
                 </div>
                 <p stlye="font-size: 0.8rem;" class="text-center">You can leave this out if you want to keep your current image</p>
 

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/users/user.service';
+import {Store} from "@ngxs/store";
+import {GetAllBras} from "../../store/product/product.actions";
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store
   ) {
     this.createLoginForm();
   }
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
         this.toastr.success("You have succesfully logged in", "Notification", {
           timeOut: 1200
         })
-        localStorage.setItem('uid', this.authService.getLoggedInID())
+        localStorage.setItem('uid', this.authService.getLoggedInID());
         this.roleCheck();
       }, err => {
         console.log(err);
@@ -68,5 +69,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/myProfile']);
       }
     });
+  }
+
+  dispatch() {
+    console.log('Message')
+    this.store.dispatch(new GetAllBras())
   }
 }

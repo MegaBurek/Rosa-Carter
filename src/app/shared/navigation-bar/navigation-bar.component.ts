@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavigationBarComponent implements OnInit {
 
+  cart = [];
+
   constructor(
     private authService:AuthService,
     private router: Router,

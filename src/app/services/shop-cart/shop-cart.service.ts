@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/model/product';
+import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -9,32 +10,27 @@ import { Product } from 'src/app/model/product';
 export class ShopCartService {
 
   toastr: ToastrService;
-  
-  items: Product[] = [];
+
+  constructor(
+    private db: AngularFirestore
+  ) { }
+
+  loadItems(){
+    
+  }
 
   addToCart(product){
-    this.items.push(product);
-    this.toastr.success("You have added an item to your cart", "Notification", {
-      timeOut: 1700
-    })
-    // localStorage.setItem("items", JSON.stringify(this.items));
+    
   }
 
   removeFromCart(product){
-    const index = this.items.indexOf(product);
-    if (index > -1){
-      this.items.splice(index, 1);
-    }
-  }
-
-  getItems(){
-    return this.items;
+    // const index = this.items.indexOf(product);
+    // if (index > -1){
+    //   this.items.splice(index, 1);
+    // }
   }
 
   clearCart(){
-    this.items = [];
-    return this.items;
+    
   }
-
-  constructor() { }
 }

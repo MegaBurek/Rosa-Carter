@@ -7,17 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainFeedComponent implements OnInit {
 
-  constructor() { }
-
-  // testFolder = './tests/';
-  // fs = require('fs');
+  constructor(
+  ) { }
 
   ngOnInit(): void {
-    // this.fs.readdir(this.testFolder, (err, files) => {
-    //   files.forEach(file => {
-    //     console.log(file);
-    //   });
-    // });
   }
 
 }

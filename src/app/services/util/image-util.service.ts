@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import {Injectable} from '@angular/core';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import * as firebase from 'firebase';
+import {Observable} from 'rxjs';
+import {finalize, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +11,29 @@ export class ImageUtilService {
 
   constructor(
     private storage: AngularFireStorage
-  ) { }
+  ) {
+  }
 
-  startImageupload(file) {
+  // startImageupload(file) {
+  //   const path = `public/images/products/${Date.now()}_${file.name}`;
+  //
+  //   const ref = this.storage.storage.ref(path);
+  //
+  //   this.task = this.storage.upload(path, file);
+  //
+  //   this.percentage = this.task.percentageChanges();
+  //
+  //   this.snapshot = this.task.snapshotChanges().pipe(
+  //     tap(console.log),
+  //     finalize(async () => {
+  //       this.downloadUrl = await ref.getDownloadURL();
+  //     })
+  //   );
+  //
+  // }
 
-    const pathToDownload = `public/images/profile_photos/${Date.now()}_${file.name}`;
-
-    const ref = this.storage.ref(pathToDownload);
-
-    ref.getDownloadURL.toString
-
-    this.storage.upload(pathToDownload, file);
-    return pathToDownload;
+  deleteImage(oldFilePath) {
+    this.storage.storage.refFromURL(oldFilePath).delete();
   }
 
   // loadImage(imageUrl) {

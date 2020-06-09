@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PRODUCTS } from "../../shop-cart/mock-products";
 
 @Component({
   selector: 'app-order-list',
@@ -8,7 +7,6 @@ import { PRODUCTS } from "../../shop-cart/mock-products";
 })
 export class OrderListComponent implements OnInit {
 
-  products = PRODUCTS;
 
   constructor() { }
 
