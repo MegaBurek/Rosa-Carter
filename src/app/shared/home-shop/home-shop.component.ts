@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider'
+import {fadeInAnimation} from "../../_animations/fade-in.animation";
 
 @Component({
   selector: 'app-home-shop',
   templateUrl: './home-shop.component.html',
-  styleUrls: ['./home-shop.component.scss']
+  styleUrls: ['./home-shop.component.scss'],
+  animations: [fadeInAnimation],
+  host: {'[@fadeInAnimation]':''}
 })
 export class HomeShopComponent implements OnInit {
 

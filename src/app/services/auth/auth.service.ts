@@ -5,28 +5,26 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {User} from 'src/app/model/user.model';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Store} from "@ngxs/store";
-import {GetAllBras} from "../../store/product/product.actions";
+import {Store} from '@ngxs/store';
+import {GetAllBras} from '../../store/products/products.actions';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public fireStore: AngularFirestore,
+    private db: AngularFirestore,
     public router: Router,
-    private toastr: ToastrService,
-    private store: Store
+    private toastr: ToastrService
   ) {
   }
 
-  doRegister(email, password, userInfo) {
+  doRegister(newUser, password) {
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      firebase.auth().createUserWithEmailAndPassword(newUser.email, password)
         .then((res) => {
-          console.log(res);
           resolve(res);
-          this.SetUserData(res.user, userInfo);
         }, err =>
           this.toastr.error(err.message, 'Notification', {
             timeOut: 1700
@@ -34,27 +32,8 @@ export class AuthService {
     });
   }
 
-  SetUserData(user, userInfo) {
-    const userRef: AngularFirestoreDocument<any> = this.fireStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      imageUrl: userInfo.imageUrl,
-      displayName: userInfo.displayName,
-      role: userInfo.role,
-      name: userInfo.name,
-      surname: userInfo.surname,
-      dob: userInfo.dob,
-      orders: [],
-      emailVerified: user.emailVerified,
-    };
-    return userRef.set(userData, {
-      merge: true
-    });
-  }
-
   UpdateUserData(user, userInfo) {
-    const userRef: AngularFirestoreDocument<any> = this.fireStore.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.db.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -74,7 +53,6 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(res => {
-          this.store.dispatch(new GetAllBras());
           resolve(res);
         }, err => reject(err));
     });
@@ -92,7 +70,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    let user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
     if (user != null) {
       return true;
     }
@@ -100,8 +78,10 @@ export class AuthService {
   }
 
   getLoggedInID() {
-    let user = firebase.auth().currentUser;
-    return user.uid;
+    const userId = firebase.auth().currentUser.uid;
+    if (userId != null) {
+      return userId;
+    }
   }
 
 

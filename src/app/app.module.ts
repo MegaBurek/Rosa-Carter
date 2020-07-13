@@ -11,6 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import {ProductsState} from './store/products/products.state';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +29,6 @@ import { UserService } from './services/users/user.service';
 import { RegisterComponent } from './shared/register/register.component';
 import { AccountCompletionComponent } from './shared/account-completion/account-completion.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { DropzoneDirective } from './dropzone.directive';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewMembersComponent } from './dashboard/new-members/new-members.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component';
@@ -37,12 +39,7 @@ import { BraListComponent } from './shared/bra-list/bra-list.component';
 import { UndiesListComponent } from './shared/undies-list/undies-list.component';
 import { SetsListComponent } from './shared/sets-list/sets-list.component';
 import { ProductDetailComponent } from './shared/product-detail/product-detail.component';
-import {ProductState} from "./store/product/product.state";
-import { UserState } from "./store/user/user.state";
-import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
-import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
-import {ProductsService} from "./services/products/products.service";
-
+import {ShoppingCartState} from './store/shoppingCart/shoppingCart.state';
 
 @NgModule({
   declarations: [
@@ -55,7 +52,6 @@ import {ProductsService} from "./services/products/products.service";
     RegisterComponent,
     AccountCompletionComponent,
     UserDetailComponent,
-    DropzoneDirective,
     DashboardComponent,
     NewMembersComponent,
     ShopCartComponent,
@@ -79,14 +75,16 @@ import {ProductsService} from "./services/products/products.service";
     NgImageSliderModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxsModule.forRoot([
-      ProductState,
-      UserState
-    ]),
-    NgxsStoragePluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsModule.forRoot(
+      [
+        ProductsState,
+        ShoppingCartState
+      ]
+    ),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot()
   ],
-  providers: [AuthService, UserService, AuthGuard, ProductsService],
+  providers: [AuthService, UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

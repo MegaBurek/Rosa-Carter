@@ -4,15 +4,17 @@ import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {fadeInAnimation} from '../../_animations/fade-in.animation';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [fadeInAnimation],
+  host: {'[@fadeInAnimation]': ''}
 })
 export class RegisterComponent implements OnInit {
 
-  errorMessage: string = '';
   registerForm: FormGroup;
   password: string = '';
 
@@ -75,7 +77,7 @@ export class RegisterComponent implements OnInit {
 
 
   validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
 

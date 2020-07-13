@@ -3,6 +3,8 @@ import {AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore} 
 import {Product} from 'src/app/model/product';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {BehaviorSubject, Observable} from "rxjs/index";
+import {switchMap} from "rxjs/internal/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,6 @@ import {Router} from '@angular/router';
 export class ProductsService {
 
   productCollection: AngularFirestoreCollection<Product>;
-  productDoc: AngularFirestoreDocument<Product>;
 
   constructor(
     private db: AngularFirestore,
@@ -41,17 +42,17 @@ export class ProductsService {
   // }
 
   getAllBras() {
-    this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'bra'));
+    this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'Bra'));
     return this.productCollection.valueChanges();
   }
 
   getAllUndies() {
-    this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'undie'));
+    this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'Undies'));
     return this.productCollection.valueChanges();
   }
 
   getAllSets() {
-    this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'set'));
+    this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'Set'));
     return this.productCollection.valueChanges();
   }
 }

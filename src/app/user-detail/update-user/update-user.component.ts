@@ -6,11 +6,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ImageUtilService } from 'src/app/services/util/image-util.service';
 import { User } from 'src/app/model/user.model';
 import { Router } from '@angular/router';
+import {fadeInAnimation} from "../../_animations/fade-in.animation";
 
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  styleUrls: ['./update-user.component.scss'],
+  animations: [fadeInAnimation],
+  host: {'[@fadeInAnimation]':''}
 })
 export class UpdateUserComponent implements OnInit {
 

@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import {Injectable} from '@angular/core';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { User } from 'src/app/model/user.model';
+import {User} from 'src/app/model/user.model';
+import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -13,25 +14,25 @@ export class UserService {
   user: User = new User;
 
   constructor(
-   public db: AngularFirestore,
-   public afAuth: AngularFireAuth
- ){
- }
+    public db: AngularFirestore,
+    public afAuth: AngularFireAuth
+  ) {
+  }
 
 
-  getCurrentUser(){
+  getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged(function(user){
+      var user = firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           resolve(user);
         } else {
           reject('No user logged in');
         }
-      })
-    })
+      });
+    });
   }
 
-  updateCurrentUser(value){
+  updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;
       user.updateProfile({
@@ -39,34 +40,34 @@ export class UserService {
         photoURL: user.photoURL
       }).then(res => {
         resolve(res);
-      }, err => reject(err))
-    })
+      }, err => reject(err));
+    });
   }
 
-  updateCurrentUserEmail(value){
+  updateCurrentUserEmail(value) {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;
       user.updateEmail(value).then(res => {
         resolve(res);
-      }, err => reject(err))
-    })
+      }, err => reject(err));
+    });
   }
 
-  updateCurrentUserPassword(value){
+  updateCurrentUserPassword(value) {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;
       user.updatePassword(value).then(res => {
         resolve(res);
-      }, err => reject(err))
-    })
+      }, err => reject(err));
+    });
   }
 
-  getUsers(){
+  getUsers() {
     this.userCollection = this.db.collection('users');
     return this.userCollection.valueChanges();
   }
 
-  getUser(id:string){
-    return this.db.doc('users/'+id).snapshotChanges();
+  getUser(id: string) {
+    return this.db.doc('users/' + id).snapshotChanges();
   }
 }

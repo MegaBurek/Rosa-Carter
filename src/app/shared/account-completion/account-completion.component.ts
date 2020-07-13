@@ -1,38 +1,51 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {ImageUtilService} from 'src/app/services/util/image-util.service';
+import {fadeInAnimation} from '../../_animations/fade-in.animation';
+import {User} from '../../model/user.model';
+import {Observable} from 'rxjs';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import {finalize, tap} from 'rxjs/operators';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-account-completion',
   templateUrl: './account-completion.component.html',
-  styleUrls: ['./account-completion.component.scss']
+  styleUrls: ['./account-completion.component.scss'],
+  animations: [fadeInAnimation],
+  host: {'[@fadeInAnimation]': ''}
 })
 export class AccountCompletionComponent implements OnInit, OnDestroy {
 
-  accountCompletionForm: FormGroup;
   check = false;
   selectedFile: File;
+  percentage: number;
+  downloadUrl;
+
+  newUser: User = {
+    uid: null,
+    email: '',
+    imageUrl: '',
+    displayName: '',
+    role: 'user',
+    name: '',
+    surname: '',
+    dob: '',
+    orders: [],
+    emailVerified: false
+  };
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private imgSerivce: ImageUtilService
+    private imgSerivce: ImageUtilService,
+    private firestore: AngularFirestore
   ) {
-    this.createCompletionForm();
-  }
-
-  createCompletionForm() {
-    this.accountCompletionForm = this.formBuilder.group({
-      displayName: ['', Validators.required],
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      dob: ['', Validators.required]
-    });
   }
 
   ngOnDestroy(): void {
@@ -43,61 +56,71 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
   }
 
   onFileSelected(event) {
-    this.selectedFile = <File> event.target.files[0];
+    this.selectedFile = event.target.files[0] as File;
     if (this.selectedFile != null) {
       this.check = true;
     }
   }
 
-  get f() {
-    return this.accountCompletionForm.controls;
-  }
-
   tryRegister() {
     const inputNode: any = document.querySelector('#file');
-    if (inputNode.files.lenth == 0) {
+    if (inputNode.files.lenth === 0) {
       this.toastr.error('Please upload a profile photo', 'Notification', {
         timeOut: 1700
       });
-    } else if (this.f.displayName.value == '') {
+    } else if (this.newUser.displayName === '') {
       this.toastr.error('Please enter a display name', 'Notification', {
         timeOut: 1700
       });
-    } else if (this.f.name.value == '') {
+    } else if (this.newUser.name === '') {
       this.toastr.error('Please enter your name', 'Notification', {
         timeOut: 1700
       });
-    } else if (this.f.surname.value == '') {
+    } else if (this.newUser.surname === '') {
       this.toastr.error('Please enter your surname', 'Notification', {
         timeOut: 1700
       });
-    } else if (this.f.dob.value == '') {
+    } else if (this.newUser.dob === '') {
       this.toastr.error('Please enter your date of birth', 'Notification', {
         timeOut: 1700
       });
     } else {
-      // let userInfo = {};
-      // let file: File = inputNode.files[0];
-      // let pathToDownload: string = this.imgSerivce.startImageupload(file);
-      //
-      //
-      // let email = localStorage.getItem('email');
-      // let password = localStorage.getItem('password');
-      //
-      // userInfo['displayName'] = this.f.displayName.value;
-      // userInfo['name'] = this.f.name.value;
-      // userInfo['surname'] = this.f.surname.value;
-      // userInfo['dob'] = this.f.dob.value;
-      // userInfo['role'] = 'user';
-      // userInfo['imageUrl'] = pathToDownload;
-      //
-      // this.authService.doRegister(email, password, userInfo);
-      // this.authService.doLogout();
-      // this.toastr.success('Welcome to Rosa Carter', 'Notification', {
-      //   timeOut: 1700
-      // });
-      // this.router.navigate(['/login']);
+      const email = localStorage.getItem('email');
+      const password = localStorage.getItem('password');
 
+      const file: File = inputNode.files[0];
+      const n = Date.now();
+      const storageRef = this.firestore.firestore.app.storage().ref(`public/images/profile_photos/${n}_${file.name}`);
+      const task = storageRef.put(file);
+
+      task.on('state_changed', (snapshot: any) => {
+        this.percentage = (task.snapshot.bytesTransferred / task.snapshot.totalBytes) * 100;
+      }, error => {
+        console.error(error);
+      }, () => {
+        storageRef.getDownloadURL().then((url) => {
+          this.newUser.imageUrl = url;
+          this.newUser.email = email;
+          this.authService.doRegister(this.newUser, password)
+            .then((res) => {
+              this.newUser.uid = res.user.uid;
+              this.firestore.collection('users').doc(this.newUser.uid).set(this.newUser);
+              this.toastr.success('Successfully registered', 'Notification');
+              this.router.navigate(['/login']);
+            }).catch(error => {
+            console.error(error);
+          });
+        }).catch((error) => {
+          switch (error.code) {
+            case 'storage/object-not-found':
+              console.log('File does not exist');
+            case 'storage/unauthorized':
+              console.log('No permission');
+            case 'storage/canceled':
+              console.log('Cancelled Upload');
+          }
+        });
+      });
     }
 
   }

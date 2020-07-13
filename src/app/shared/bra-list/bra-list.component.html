@@ -34,7 +34,7 @@
         <hr class="divider-main"
             style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));margin-bottom: 20px;margin-top: 0;">
         <div class="new-gallery">
-            <div class="new-gallery-item" *ngFor="let product of currentBras | async">
+            <div class="new-gallery-item" *ngFor="let product of products | async" routerLink="/product/{{product.uid}}">
                 <img [src]="product.imageUrl" alt="" class="new-gallery-image img-responsive">
                 <div class="desc-box">
                     <div class="info">
@@ -44,7 +44,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                         id="Capa_1" x="0px" y="0px" viewBox="0 0 490.996 490.996"
                         style="enable-background:new 0 0 490.996 490.996;" xml:space="preserve"
-                        class="add-to-cart-icon">
+                        class="add-to-cart-icon" (click)="addToCart(product)">
                         <g>
                             <g>
                                 <g id="Icons_1_">

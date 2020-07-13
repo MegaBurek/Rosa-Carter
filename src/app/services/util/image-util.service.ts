@@ -1,36 +1,20 @@
 import {Injectable} from '@angular/core';
-import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import * as firebase from 'firebase';
+import {finalize} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {finalize, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUtilService {
 
+  downloadUrl: Observable<string>;
+
   constructor(
     private storage: AngularFireStorage
   ) {
   }
-
-  // startImageupload(file) {
-  //   const path = `public/images/products/${Date.now()}_${file.name}`;
-  //
-  //   const ref = this.storage.storage.ref(path);
-  //
-  //   this.task = this.storage.upload(path, file);
-  //
-  //   this.percentage = this.task.percentageChanges();
-  //
-  //   this.snapshot = this.task.snapshotChanges().pipe(
-  //     tap(console.log),
-  //     finalize(async () => {
-  //       this.downloadUrl = await ref.getDownloadURL();
-  //     })
-  //   );
-  //
-  // }
 
   deleteImage(oldFilePath) {
     this.storage.storage.refFromURL(oldFilePath).delete();

@@ -1,48 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, animate, style, group, animateChild, query, stagger, transition } from '@angular/animations';
-
-const fade = [
-  query(':self',
-    [
-      style({ opacity: 0 })
-    ],
-    { optional: true }
-  ),
-
-  query(':self',
-    [
-      style({ opacity: 0 }),
-      animate('.7s ease-in', style({ opacity: 1 }))
-    ],
-    { optional: true }
-  )
-];
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngxs/store';
+import {GetAllBras, GetAllSets, GetAllUndies} from './store/products/products.actions';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    trigger('routerAnimations', [
-      transition('* => *', fade)
-    ])
-  ]
+  styleUrls: ['./app.component.scss']
 })
 
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
 
   constructor(
-  ){}
+    private store: Store
+  ) {
 
-  ngOnInit(): void {
   }
 
-
-  prepareRouteTransition(outlet) {
-    const animation = outlet.activatedRouteData['animation'] || {};
-    return animation['value'] || null;
+  ngOnInit() {
+    this.store.dispatch(new GetAllBras());
+    this.store.dispatch(new GetAllUndies());
+    this.store.dispatch(new GetAllSets());
   }
+
 
 }

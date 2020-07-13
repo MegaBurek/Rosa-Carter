@@ -6,13 +6,15 @@ import {ImageUtilService} from '../../services/util/image-util.service';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {Observable} from 'rxjs';
 import {finalize, tap} from 'rxjs/operators';
-import {FirebaseStorage} from '@angular/fire';
 import {Router} from '@angular/router';
+import {fadeInAnimation} from '../../_animations/fade-in.animation';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  styleUrls: ['./add-product.component.scss'],
+  animations: [fadeInAnimation],
+  host: {'[@fadeInAnimation]': ''}
 })
 export class AddProductComponent implements OnInit {
 
@@ -24,6 +26,8 @@ export class AddProductComponent implements OnInit {
     type: '',
     imageUrl: ''
   };
+
+  imageUrl: string = '';
 
   check = false;
   selectedFile: File;
@@ -74,20 +78,35 @@ export class AddProductComponent implements OnInit {
       });
     } else {
       const file: File = inputNode.files[0];
-      const path = `public/images/products/${Date.now()}_${file.name}`;
+      const pathUpload = `public/images/products/${Date.now()}_${file.name}`;
 
-      const ref = this.storage.storage.ref(path);
 
-      this.task = this.storage.upload(path, file);
+      this.task = this.storage.upload(pathUpload, file);
 
       this.percentage = this.task.percentageChanges().pipe(
         tap(console.log),
-        finalize( async () => {
-          this.newProduct.imageUrl = path;
-          await this.productService.addProduct(this.newProduct);
+        finalize(async () => {
+          await this.detDownloadUrl(pathUpload);
         })
       );
     }
+  }
+
+  detDownloadUrl(pathUpload) {
+    let pathRef = this.storage.storage.ref(pathUpload);
+    pathRef.getDownloadURL().then(url => {
+      this.newProduct.imageUrl = url;
+      this.productService.addProduct(this.newProduct);
+    }).catch(error => {
+      switch (error.code) {
+        case 'storage/object-not-found':
+          console.log('File does not exist');
+        case 'storage/unauthorized':
+          console.log('No permission');
+        case 'storage/canceled':
+          console.log('Cancelled Upload');
+      }
+    });
   }
 
 }

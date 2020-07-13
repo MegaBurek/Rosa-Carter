@@ -1,41 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/auth/auth.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {fadeInAnimation} from '../../_animations/fade-in.animation';
 
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.scss']
+  styleUrls: ['./navigation-bar.component.scss'],
+  animations: [fadeInAnimation],
+  host: {'[@fadeInAnimation]': ''}
 })
 export class NavigationBarComponent implements OnInit {
 
   cart = [];
 
   constructor(
-    private authService:AuthService,
+    public authService: AuthService,
     private router: Router,
     private toastr: ToastrService
-  ) 
-    {}
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     let user = localStorage.getItem('uid');
-    if (user != null){
+    if (user != null) {
       return true;
     }
     return false;
   }
 
-  logout(){
+  logout() {
     this.authService.doLogout();
     localStorage.removeItem('uid');
-    this.toastr.success("Your have logged out", "Notification", {
+    localStorage.removeItem('@@STATE');
+    this.toastr.success('Your have logged out', 'Notification', {
       timeOut: 1700
-    })
+    });
     this.router.navigate(['/login']);
 
   }

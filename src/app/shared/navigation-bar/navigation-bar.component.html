@@ -13,7 +13,7 @@
                     data-original="#000000" class="active-path" data-old_color="#000000" />
             </svg>
         </a>
-        <a class="user-link" routerLink="/myProfile" title="Account" *ngIf="isLoggedIn()">
+        <a class="user-link" routerLink="/user/{{authService.getLoggedInID()}}" title="Account" *ngIf="isLoggedIn()">
             <svg class="icon" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 512 512">
                 <path
                     d="m210.351562 246.632812c33.882813 0 63.222657-12.152343 87.195313-36.128906 23.972656-23.972656 36.125-53.304687 36.125-87.191406 0-33.875-12.152344-63.210938-36.128906-87.191406-23.976563-23.96875-53.3125-36.121094-87.191407-36.121094-33.886718 0-63.21875 12.152344-87.191406 36.125s-36.128906 53.308594-36.128906 87.1875c0 33.886719 12.15625 63.222656 36.132812 87.195312 23.976563 23.96875 53.3125 36.125 87.1875 36.125zm0 0"
@@ -60,10 +60,10 @@
             <a class="nav-link" routerLink="/bras"><span data-hover="BRAS" class="link-text">BRAS</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/undies"><span data-hover="UNDIES" class="link-text">UNDIES</span></a>
+            <a class="nav-link" routerLink="/undies"><span data-hover="UNDIES" class="link-text">UNDIES</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/sets"><span data-hover="SETS" class="link-text">SETS</span></a>
+            <a class="nav-link" routerLink="/sets"><span data-hover="SETS" class="link-text">SETS</span></a>
         </li>
     </ul>
 

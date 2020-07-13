@@ -15,29 +15,33 @@ import {BraListComponent} from './shared/bra-list/bra-list.component';
 import {UndiesListComponent} from './shared/undies-list/undies-list.component';
 import {SetsListComponent} from './shared/sets-list/sets-list.component';
 import {ProductDetailComponent} from './shared/product-detail/product-detail.component';
+import {CustomPreloadingStrategy} from "./custom-preload-route";
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, data: {animation: {value: 'LoginPage'}}},
   {path: 'register', component: RegisterComponent, data: {animation: {value: 'RegisterPage'}}},
-  {path: 'home', component: MainFeedComponent, data: {animation: {value: 'HomePage'}}},
-  {path: 'accountCompletion', component: AccountCompletionComponent, data: {animation: {value: 'accountCompletionPage'}}},
-  {path: 'shopping-cart', component: ShopCartComponent, data: {animation: {value: 'shopcartPage'}}},
-  {path: 'myProfile', component: UserDetailComponent, data: {animation: {value: 'MyHomePage'}}, canActivate: [AuthGuard]},
-  {path: 'editProfile', component: UpdateUserComponent, data: {animation: {value: 'EditProfilePage'}}, canActivate: [AuthGuard]},
-  {path: 'dashboard', component: DashboardComponent, data: {animation: {value: 'DashboardPage'}}, canActivate: [AuthGuard]},
-  {path: 'addProduct', component: AddProductComponent, data: {animation: {value: 'AddProductPage'}}, canActivate: [AuthGuard]},
-  {path: 'product/{id}', component: ProductDetailComponent, data: {animation: {value: 'ProductDetailPage'}}, canActivate: [AuthGuard]},
-  {path: 'currentOrders', component: OrderListComponent, data: {animation: {value: 'OrderListPage'}}, canActivate: [AuthGuard]},
-  {path: 'bras', component: BraListComponent, data: {animation: {value: 'BrasPage'}}, canActivate: [AuthGuard]},
-  {path: 'undies', component: UndiesListComponent, data: {animation: {value: 'UndiesPage'}}, canActivate: [AuthGuard]},
-  {path: 'sets', component: SetsListComponent, data: {animation: {value: 'SetsPage'}}, canActivate: [AuthGuard]}
+  {path: 'home', component: MainFeedComponent, data: {preload:true}, canActivate: [AuthGuard]},
+  {path: 'accountCompletion', component: AccountCompletionComponent},
+  {path: 'shopping-cart', component: ShopCartComponent, canActivate: [AuthGuard]},
+  {path: 'user/:userId', component: UserDetailComponent, canActivate: [AuthGuard]},
+  {path: 'editProfile', component: UpdateUserComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', component: DashboardComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {path: 'addProduct', component: AddProductComponent, canActivate: [AuthGuard]},
+  {path: 'product/{id}', component: ProductDetailComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {path: 'currentOrders', component: OrderListComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {path: 'bras', component: BraListComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {path: 'undies', component: UndiesListComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {path: 'sets', component: SetsListComponent, data: {preload: true}, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: CustomPreloadingStrategy
+  })],
+  exports: [RouterModule],
+  providers: [CustomPreloadingStrategy]
 })
 export class AppRoutingModule {
 }
