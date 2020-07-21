@@ -35,3 +35,43 @@
   justify-content: center;
   align-content: center;
 }
+
+.main-shop{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  .shop-item{
+    cursor: pointer;
+    width: 138px;
+    margin: 0.5em;
+    height: 235px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    .shop-item-img{
+      height: 165px;
+      border-radius: 1rem;
+      &:hover{
+        box-shadow: 0 0 12px #F5F5F5;
+        transition: box-shadow 0.3s ease-in-out;
+      }
+    }
+    .shop-item-text{
+      margin-top: 5px;
+      color: $font;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.footer{
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}

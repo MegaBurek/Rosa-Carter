@@ -21,9 +21,11 @@ export class AddProductComponent implements OnInit {
   newProduct: Product = {
     uid: null,
     name: '',
+    color: 'black',
     desc: '',
     price: '',
     type: '',
+    dateCreated: new Date(),
     imageUrl: ''
   };
 

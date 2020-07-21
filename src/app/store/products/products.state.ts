@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Product} from '../../model/product';
 import {ProductsService} from '../../services/products/products.service';
-import {GetAllBras, GetAllSets, GetAllUndies} from './products.actions';
+import {GetAllBras, GetAllSets, GetAllUndies, GetLatestProducts} from './products.actions';
 import {tap} from 'rxjs/internal/operators';
 
 export class ProductStateModel {
@@ -10,6 +10,7 @@ export class ProductStateModel {
   sets: Product[];
   undies: Product[];
   selectedProduct: Product;
+  latestProducts: Product[];
 }
 
 @State<ProductStateModel>({
@@ -19,8 +20,9 @@ export class ProductStateModel {
     sets: [],
     undies: [],
     selectedProduct: {
-      uid: null, name: null, desc: null, price: null, type: null, imageUrl: null
-    }
+      uid: null, name: null, color: null, desc: null, price: null, type: null, dateCreated: null, imageUrl: null
+    },
+    latestProducts: []
   }
 })
 @Injectable()
@@ -32,8 +34,13 @@ export class ProductsState {
   }
 
   @Selector()
-  static getSelectedProduct(state: ProductStateModel){
+  static getSelectedProduct(state: ProductStateModel) {
     return state.selectedProduct;
+  }
+
+  @Selector()
+  static getLatestProducts(state: ProductStateModel) {
+    return state.latestProducts;
   }
 
   @Selector()
@@ -75,6 +82,15 @@ export class ProductsState {
     return this.ps.getAllUndies().pipe(tap((latestUndies) => {
       patchState({
         undies: latestUndies
+      });
+    }));
+  }
+
+  @Action(GetLatestProducts)
+  getLatestProducts({patchState}: StateContext<ProductStateModel>) {
+    return this.ps.getNewArrivals().pipe(tap((products) => {
+      patchState({
+        latestProducts: products
       });
     }));
   }

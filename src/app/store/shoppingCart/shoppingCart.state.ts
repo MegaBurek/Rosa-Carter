@@ -1,6 +1,6 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {AddToShoppingCart, GetShoppingCart, RemoveFromShoppingCart, SetSelectedShoppingCartItem} from './shoppingCart.actions';
+import {AddToShoppingCart, EditSelectedShoppingCartItem, RemoveFromShoppingCart, SetSelectedShoppingCartItem} from './shoppingCart.actions';
 import {ShoppingCartService} from '../../services/shoppingCart/shopping-cart.service';
 import {ShoppingCartItem} from '../../model/shopping-cart-item';
 
@@ -14,7 +14,7 @@ export class ShoppingCartStateModel {
   defaults: {
     shoppingCart: [],
     selectedShoppingItem: {
-      id: null, product: null, quantity: null
+      product: null, quantity: null
     }
   }
 })
@@ -32,13 +32,13 @@ export class ShoppingCartState {
   }
 
   @Selector()
-  static getSelectedShoppingItem(state: ShoppingCartStateModel) {
-    return state.selectedShoppingItem;
+  static getCartSize(state: ShoppingCartStateModel) {
+    return state.shoppingCart.length;
   }
 
   @Selector()
-  static getShoppingCartSize(state: ShoppingCartStateModel) {
-    return state.shoppingCart.length;
+  static getSelectedShoppingItem(state: ShoppingCartStateModel) {
+    return state.selectedShoppingItem;
   }
 
   @Action(SetSelectedShoppingCartItem)
@@ -46,6 +46,13 @@ export class ShoppingCartState {
     patchState({
       selectedShoppingItem: shoppingCartItem
     });
+  }
+
+  @Action(EditSelectedShoppingCartItem)
+  editSelectedShoppingCartItem({getState, setState}: StateContext<ShoppingCartStateModel>, {shoppingCartItemIndex, shoppingCartItem}: EditSelectedShoppingCartItem) {
+    const state = getState();
+    const shoppingCart = state.shoppingCart;
+
   }
 
   @Action(AddToShoppingCart)
@@ -64,11 +71,6 @@ export class ShoppingCartState {
       }
     );
   }
-
-  // @Action(GetShoppingCart)
-  // getShoppingCart({patchState}: StateContext<ShoppingCartStateModel>) {
-  //   return this.
-  // }
 
 
 }

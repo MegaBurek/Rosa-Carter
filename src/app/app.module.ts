@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsEmitPluginModule } from '@ngxs-labs/emitter';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import {ProductsState} from './store/products/products.state';
@@ -31,7 +32,6 @@ import { AccountCompletionComponent } from './shared/account-completion/account-
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewMembersComponent } from './dashboard/new-members/new-members.component';
-import { ShopCartComponent } from './shop-cart/shop-cart.component';
 import { AddProductComponent } from './dashboard/add-product/add-product.component';
 import { OrderListComponent } from './dashboard/order-list/order-list.component';
 import { UpdateUserComponent } from './user-detail/update-user/update-user.component';
@@ -40,6 +40,9 @@ import { UndiesListComponent } from './shared/undies-list/undies-list.component'
 import { SetsListComponent } from './shared/sets-list/sets-list.component';
 import { ProductDetailComponent } from './shared/product-detail/product-detail.component';
 import {ShoppingCartState} from './store/shoppingCart/shoppingCart.state';
+import {CartSizeState} from './store/shoppingCart/shoppingCartSize.state';
+import { CartComponent } from './cart/cart.component';
+import {ModalModule} from './_modal';
 
 @NgModule({
   declarations: [
@@ -54,20 +57,21 @@ import {ShoppingCartState} from './store/shoppingCart/shoppingCart.state';
     UserDetailComponent,
     DashboardComponent,
     NewMembersComponent,
-    ShopCartComponent,
     AddProductComponent,
     OrderListComponent,
     UpdateUserComponent,
     BraListComponent,
     UndiesListComponent,
     SetsListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
+    ModalModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFirestoreModule,
@@ -78,11 +82,13 @@ import {ShoppingCartState} from './store/shoppingCart/shoppingCart.state';
     NgxsModule.forRoot(
       [
         ProductsState,
-        ShoppingCartState
+        ShoppingCartState,
+        CartSizeState
       ]
     ),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsStoragePluginModule.forRoot()
+    NgxsStoragePluginModule.forRoot(),
+    NgxsEmitPluginModule.forRoot(),
   ],
   providers: [AuthService, UserService, AuthGuard],
   bootstrap: [AppComponent]

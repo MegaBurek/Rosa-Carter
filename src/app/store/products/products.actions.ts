@@ -1,14 +1,27 @@
 export class GetAllBras {
   static readonly type = '[Products API] Get All Bras';
-  constructor() {}
+
+  constructor() {
+  }
 }
 
 export class GetAllUndies {
   static readonly type = '[Products API] Get All Undies';
-  constructor() {}
+
+  constructor() {
+  }
 }
 
 export class GetAllSets {
   static readonly type = '[Products API] Get All Sets';
-  constructor() {}
+
+  constructor() {
+  }
+}
+
+export class GetLatestProducts {
+  static readonly type = '[Products API] Get Latest Products';
+
+  constructor() {
+  }
 }

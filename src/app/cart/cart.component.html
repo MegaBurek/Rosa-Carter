@@ -1,0 +1,38 @@
+<div class="cart-layout">
+  <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">Shopping Cart</h5>
+  <hr class="divider-main" style='margin-top: 0;'>
+  <ul class="shop-cart-container container">
+    <li class="shop-item" *ngFor="let item of shoppingItems | async; let i = index">
+      <img [src]="item.product.imageUrl" class="img-product" alt="">
+      <div class="info-layout">
+        <p class="product-info">{{item.product.name}}</p>
+        <p class="product-info">P{{item.product.price}}.00</p>
+        <p class="product-info">Quantity: {{item.quantity}}</p>
+      </div>
+      <img src="../../assets/icons/icons8-edit-96.png" class="add-to-cart-icon" (click)="openEditModal('edit-item-modal', item, i)">
+      <img src="../../assets/icons/icons8-remove-96.png" class="add-to-cart-icon" (click)="removeItem(i)">
+    </li>
+  </ul>
+  <div class="checkout-layout container">
+    <hr class="divider-main" style='margin-top: 0;'>
+    <h5 class="total-label mr-auto ml-auto text-center">Total: P100.00</h5>
+    <button class="btn btn-block text-uppercase button">Checkout</button>
+  </div>
+</div>
+<jw-modal id="edit-item-modal" *ngIf="shoppingCartItem|async as item">
+  <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">Edit Item</h5>
+  <img [src]="item.product.imageUrl" class="edit-shop-item-img" alt="">
+  <p class="edit-shop-info text-center">Color</p>
+  <div class="color-picker-layout">
+    <div class="color-circle">
+
+    </div>
+  </div>
+  <p class="edit-shop-info text-center">Quantity</p>
+  <div class="quantity-picker-layout">
+    <img src="../../assets/icons/icons8-minus-96.png" class="add-to-cart-icon">
+    <p class="quantity">{{item.quantity}}</p>
+    <img src="../../assets/icons/icons8-plus-math-90.png" class="add-to-cart-icon">
+  </div>
+  <button class="btn btn-block text-uppercase button" (click)="closeEditModal('edit-item-modal');">Close</button>
+</jw-modal>

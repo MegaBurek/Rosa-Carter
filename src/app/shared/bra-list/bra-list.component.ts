@@ -19,31 +19,14 @@ import {ShoppingCartItem} from '../../model/shopping-cart-item';
 export class BraListComponent implements OnInit {
 
   @Select(ProductsState.getBras) products: Observable<Product[]>;
-  @Select(ShoppingCartState.getShoppingCartSize) itemsInCart: Observable<number>;
-  shoppingCartItem: ShoppingCartItem = {
-    id: 0,
-    product: null,
-    quantity: 1
-  };
-  cartSize = 0;
 
   constructor(
     private store: Store,
     private toastr: ToastrService
   ) {
-    this.itemsInCart.subscribe(value => {
-      this.cartSize = value;
-    });
   }
 
   ngOnInit(): void {
-  }
-
-  addToCart(product) {
-    this.shoppingCartItem.id = this.cartSize;
-    this.shoppingCartItem.product = product;
-    this.store.dispatch(new AddToShoppingCart(this.shoppingCartItem));
-    this.toastr.success('You have added to your cart', 'Notificaiton');
   }
 
 }

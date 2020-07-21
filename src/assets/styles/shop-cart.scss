@@ -1,46 +1,56 @@
 .nav-back {
-    width: 30px;
-    &:hover {
-        fill: $secondary;
-    }
+  width: 30px;
+
+  &:hover {
+    fill: $secondary;
+  }
 }
 
 .title-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .shop-cart-container {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: flex-start;
-    margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  margin: 0;
+  height: 355px;
+  padding: 0.1em;
+  overflow-y: scroll;
 }
 
 .shop-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 20%;
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 20%;
+  margin-bottom: 15px;
+
+  .info {
+    color: $font;
+  }
 }
 
 .total-label {
-    font-family: "leadFont";
-    font-size: 1.8rem;
+  font-family: "leadFont";
+  font-size: 1.8rem;
+  color: $font;
 }
 
 .product-info {
-    font-family: "subFont";
-    margin: 0;
+  font-family: "subFont";
+  margin: 0;
+  color: $font;
 }
 
-.amount-picker{
+.amount-picker {
   width: 40px;
   display: flex;
   flex-direction: column;
@@ -49,19 +59,96 @@
 }
 
 .shop-cart-link {
-    width: 40px;
-    margin-left: 5px;
+  width: 40px;
+  margin-left: 5px;
   cursor: pointer;
-    &:hover {
-        fill: $secondary;
-    }
+
+  &:hover {
+    fill: $secondary;
+  }
 }
 
 .img-product {
-    border-radius: 1rem;
-    object-fit: fill;
-    box-shadow: 0px 0px 5px $background;
-    max-width: 60px;
-    max-height: 60px;
-    margin-right: 10px;
+  border-radius: 1rem;
+  object-fit: fill;
+  max-width: 70px;
+  max-height: 70px;
+  margin-right: 10px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 12px #F5F5F5;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+}
+
+//cart new
+.cart-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.info-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-layout{
+  position: fixed;
+  bottom: 0%;
+  margin-bottom: 1rem;
+}
+
+.edit-shop-item-img{
+  border-radius: 1rem;
+  object-fit: fill;
+  max-width: 140px;
+  max-height: 140px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 12px #F5F5F5;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+}
+
+.edit-shop-info{
+  font-family: "subFont";
+  margin: 0;
+  font-size: 1.3rem;
+  color: $font;
+}
+
+.color-picker-layout{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  padding: 0.2em;
+}
+
+.color-circle{
+  border-radius: 50%;
+  border: 1px solid $font;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.quantity-picker-layout{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.quantity{
+  font-family: "subFont";
+  margin: 0;
+  color: $font;
+  width: 15px;
+  font-size: 1.5rem;
 }

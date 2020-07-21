@@ -118,9 +118,8 @@
   grid-column-gap: 8px;
   grid-row-gap: 5px;
   margin: 0;
-  height: 70%;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(21, 5vw);
+  grid-template-rows: repeat(12, 5vw);
 }
 
 .gallery__item {

@@ -3,8 +3,8 @@ import {AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore} 
 import {Product} from 'src/app/model/product';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {BehaviorSubject, Observable} from "rxjs/index";
-import {switchMap} from "rxjs/internal/operators";
+import Timestamp = firebase.firestore.Timestamp;
+import firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,11 @@ export class ProductsService {
 
   addProduct(product) {
     this.db.collection('products').add(product)
-      .then(_ => {
-        this.toastr.success('Successfully added a product', 'Notification');
-        this.router.navigate(['/product']);
+      .then(docRef => {
+        docRef.set({uid: docRef.id}, {merge: true}).then(() => {
+          this.toastr.success('Successfully added a product', 'Notification');
+          this.router.navigate(['/product' + `/${docRef.id}`]);
+        });
       })
       .catch(e => {
         this.toastr.error('Error with adding product', 'Notification');
@@ -32,9 +34,9 @@ export class ProductsService {
       });
   }
 
-  // getProductById(id) {
-  //
-  // }
+  getProductById(id) {
+    return this.db.collection('products').doc(id).get();
+  }
 
   // getAllProducts() {
   //   this.productCollection = this.db.collection('products');
@@ -43,6 +45,13 @@ export class ProductsService {
 
   getAllBras() {
     this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'Bra'));
+    return this.productCollection.valueChanges();
+  }
+
+  getNewArrivals() {
+    this.productCollection = this.db.collection('products', ref =>
+      ref.limit(5)
+        .orderBy('dateCreated'));
     return this.productCollection.valueChanges();
   }
 

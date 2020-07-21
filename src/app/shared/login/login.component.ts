@@ -5,6 +5,8 @@ import {AuthService} from 'src/app/services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {UserService} from 'src/app/services/users/user.service';
 import {fadeInAnimation} from '../../_animations/fade-in.animation';
+import {Store} from '@ngxs/store';
+import {GetLatestProducts} from '../../store/products/products.actions';
 
 @Component({
   selector: 'app-login',

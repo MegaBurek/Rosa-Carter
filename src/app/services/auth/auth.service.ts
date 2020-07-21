@@ -6,7 +6,7 @@ import {User} from 'src/app/model/user.model';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Store} from '@ngxs/store';
-import {GetAllBras} from '../../store/products/products.actions';
+import {GetAllBras, GetLatestProducts} from '../../store/products/products.actions';
 import {Observable} from 'rxjs';
 
 @Injectable()
@@ -16,7 +16,8 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     private db: AngularFirestore,
     public router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store
   ) {
   }
 
@@ -53,6 +54,7 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(res => {
+          this.store.dispatch(new GetLatestProducts());
           resolve(res);
         }, err => reject(err));
     });
