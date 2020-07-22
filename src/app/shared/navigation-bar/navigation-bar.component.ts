@@ -25,6 +25,10 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loggedInUserID() {
+    return this.authService.getLoggedInID();
+  }
+
   isLoggedIn() {
     let user = localStorage.getItem('uid');
     if (user != null) {

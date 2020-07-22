@@ -40,9 +40,12 @@ import { UndiesListComponent } from './shared/undies-list/undies-list.component'
 import { SetsListComponent } from './shared/sets-list/sets-list.component';
 import { ProductDetailComponent } from './shared/product-detail/product-detail.component';
 import {ShoppingCartState} from './store/shoppingCart/shoppingCart.state';
-import {CartSizeState} from './store/shoppingCart/shoppingCartSize.state';
 import { CartComponent } from './cart/cart.component';
 import {ModalModule} from './_modal';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {OrdersState} from './store/orders/orders.state';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import {UserState} from './store/user/user.state';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import {ModalModule} from './_modal';
     UndiesListComponent,
     SetsListComponent,
     ProductDetailComponent,
-    CartComponent
+    CartComponent,
+    PageNotFoundComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,8 @@ import {ModalModule} from './_modal';
       [
         ProductsState,
         ShoppingCartState,
-        CartSizeState
+        OrdersState,
+        UserState
       ]
     ),
     NgxsReduxDevtoolsPluginModule.forRoot(),

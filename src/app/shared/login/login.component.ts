@@ -7,6 +7,9 @@ import {UserService} from 'src/app/services/users/user.service';
 import {fadeInAnimation} from '../../_animations/fade-in.animation';
 import {Store} from '@ngxs/store';
 import {GetLatestProducts} from '../../store/products/products.actions';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {User} from '../../model/user.model';
+import {SetLoggedInUser} from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +24,14 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   role: string = '';
 
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private db: AngularFirestore,
+    private store: Store
   ) {
     this.createLoginForm();
   }
@@ -53,6 +57,7 @@ export class LoginComponent implements OnInit {
           timeOut: 1200
         });
         localStorage.setItem('uid', this.authService.getLoggedInID());
+        this.setLoggedInUser(this.authService.getLoggedInID());
         this.roleCheck();
       }, err => {
         console.log(err);
@@ -63,8 +68,24 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  setLoggedInUser(id) {
+    const user: User = new User();
+    this.db.collection('users').doc(id).snapshotChanges().subscribe(actionArray => {
+      user.uid = actionArray.payload.get('uid');
+      user.email = actionArray.payload.get('email');
+      user.displayName = actionArray.payload.get('displayName');
+      user.imageUrl = actionArray.payload.get('imageUrl');
+      user.orders = actionArray.payload.get('orders');
+      user.emailVerified = actionArray.payload.get('emailVerified');
+      user.role = actionArray.payload.get('role');
+      user.name = actionArray.payload.get('name');
+      user.surname = actionArray.payload.get('surname');
+    });
+    this.store.dispatch(new SetLoggedInUser(user));
+  }
+
   roleCheck() {
-    this.userService.getUser(this.authService.getLoggedInID()).subscribe(actionArray => {
+    this.userService.getUserById(this.authService.getLoggedInID()).subscribe(actionArray => {
       this.role = actionArray.payload.get('role');
       if (this.role === 'admin') {
         this.router.navigate(['/dashboard']);

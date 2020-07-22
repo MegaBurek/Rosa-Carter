@@ -1,49 +1,76 @@
 <div class="card card-userinput mr-auto ml-auto">
-    <div class="card-body">
-        <div class="wrapper">
-            <h5 class="card-title text-center" style="margin: 0;">Edit Profile</h5>
-            <form class="form-signin">
-                <div class="dflex flex-row">
-                    <label for="input-label" style="width: 50%">Display Photo</label>
-                    <label for="text" style="width: 50%" *ngIf="check">✔</label>
-                </div>
-                <div class="form-label-group">
-                    <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
-                    <label for="file" class="btn-2">Click to upload 📁</label>
-                </div>
-                <p stlye="font-size: 0.8rem;" class="text-center">You can leave this out if you want to keep your current image</p>
-
-                <label for="input-label">Email</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" name="email" [(ngModel)]="user.email" type="text"
-                        required>
-                </div>
-
-                <label for="input-label">Display Name</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" name="displayName" [(ngModel)]="user.displayName"
-                        type="text" required>
-                </div>
-
-                <label for="input-label">Name</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" name="name" [(ngModel)]="user.name" type="text">
-                </div>
-
-                <label for="input-label">Surname</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" name="surname" [(ngModel)]="user.surname" type="text"
-                        required>
-                </div>
-
-                <label for="input-label">Date of Birth</label>
-                <div class="form-label-group">
-                    <input class="form-control form-control-lg" name="dob" [(ngModel)]="user.dob" type="date" required
-                        style="margin-bottom: 10px;">
-                </div>
-
-                <button class="btn btn-lg btn-block text-uppercase" (click)="tryEdit()">EDIT</button>
-            </form>
+  <div class="card-body">
+    <div class="wrapper">
+      <div class="title-box">
+        <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+             style="enable-background:new 0 0 512 512;cursor: pointer;" xml:space="preserve" (click)="goToLoggedInUserProfile()">
+                    <g>
+                        <g>
+                            <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
+        c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
+        c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
+        L313.749,347.584z"/>
+                        </g>
+                    </g>
+                </svg>
+        <h5 class="card-title text-center" style="margin-bottom: 0;">Edit Profile</h5>
+        <svg class="nav-back" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+             style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                    <g>
+                        <g>
+                            <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
+        c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
+        c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
+        L313.749,347.584z" fill="#f7f7f2"/>
+                        </g>
+                    </g>
+                </svg>
+      </div>
+      <form class="form-signin">
+        <div class="dflex flex-row">
+          <label for="input-label" style="width: 50%">Display Photo</label>
+          <label for="text" style="width: 50%" *ngIf="check">✔</label>
         </div>
+        <div class="form-label-group">
+          <input type="file" id="file" accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
+          <label for="file" class="btn-2">Click to upload 📁</label>
+        </div>
+        <p stlye="font-size: 0.8rem;" class="text-center">You can leave this out if you want to keep your current
+          image</p>
+
+        <label for="input-label">Email</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="email" [(ngModel)]="user.email" type="text"
+                 required>
+        </div>
+
+        <label for="input-label">Display Name</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="displayName" [(ngModel)]="user.displayName"
+                 type="text" required>
+        </div>
+
+        <label for="input-label">Name</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="name" [(ngModel)]="user.name" type="text">
+        </div>
+
+        <label for="input-label">Surname</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="surname" [(ngModel)]="user.surname" type="text"
+                 required>
+        </div>
+
+        <label for="input-label">Date of Birth</label>
+        <div class="form-label-group">
+          <input class="form-control form-control-lg" name="dob" [(ngModel)]="user.dob" type="date" required
+                 style="margin-bottom: 10px;">
+        </div>
+
+        <button class="btn btn-lg btn-block text-uppercase" (click)="tryEdit()">complete</button>
+      </form>
     </div>
+  </div>
 </div>

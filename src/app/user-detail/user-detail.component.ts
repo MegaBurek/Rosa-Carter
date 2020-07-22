@@ -6,6 +6,10 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {fadeInAnimation} from '../_animations/fade-in.animation';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {OrdersState} from '../store/orders/orders.state';
+import {Order} from '../model/order.model';
+import {Observable} from 'rxjs';
+import {Select} from '@ngxs/store';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,6 +19,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
   host: {'[@fadeInAnimation]': ''}
 })
 export class UserDetailComponent implements OnInit {
+
+  @Select(OrdersState.getMyOrders) myOrders: Observable<Order[]>;
 
   user: User = new User;
   edit: false;
@@ -40,7 +46,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUser(this.activatedRoute.snapshot.params.userId).subscribe(actionArray => {
+    this.userService.getUserById(this.activatedRoute.snapshot.params.userId).subscribe(actionArray => {
       this.user.imageUrl = actionArray.payload.get('imageUrl');
       this.user.displayName = actionArray.payload.get('displayName');
       this.user.email = actionArray.payload.get('email');
@@ -49,7 +55,6 @@ export class UserDetailComponent implements OnInit {
       this.user.name = actionArray.payload.get('name');
       this.user.surname = actionArray.payload.get('surname');
       this.user.role = actionArray.payload.get('role');
-      console.log(this.user);
     });
   }
 

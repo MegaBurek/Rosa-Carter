@@ -2,8 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {fadeInAnimation} from '../../_animations/fade-in.animation';
 import {ProductsService} from '../../services/products/products.service';
 import {ActivatedRoute} from '@angular/router';
-import {DocumentSnapshot} from '@angular/fire/firestore';
-import {Product} from '../../model/product';
 import {NgImageSliderComponent} from 'ng-image-slider';
 
 @Component({

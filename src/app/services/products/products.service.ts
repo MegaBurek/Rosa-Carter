@@ -38,11 +38,6 @@ export class ProductsService {
     return this.db.collection('products').doc(id).get();
   }
 
-  // getAllProducts() {
-  //   this.productCollection = this.db.collection('products');
-  //   return this.productCollection.valueChanges();
-  // }
-
   getAllBras() {
     this.productCollection = this.db.collection('products', ref => ref.where('type', '==', 'Bra'));
     return this.productCollection.valueChanges();

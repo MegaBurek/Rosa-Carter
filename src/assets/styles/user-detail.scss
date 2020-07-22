@@ -1,6 +1,6 @@
 .user-detail-profile-photo{
     border-radius: 1rem;
-    width: 60%;
+    width: 150px;
     height: 150px;
     object-fit: fill;
     box-shadow: 0px 0px 5px $background
@@ -19,4 +19,64 @@ p{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.user-info{
+  color: $font;
+  font-size: 1.3rem;
+}
+
+.my-orders{
+  list-style: none;
+}
+
+.order{
+  height: 80px;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "leadFont";
+  background-color: $background;
+  overflow: visible;
+  -moz-border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  &:hover{
+    .order-image{
+      box-shadow: 0 0 12px #F5F5F5;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+  }
+  .order-image{
+    width: 60px;
+    height: 60px;
+    border-radius: 1rem;
+    object-fit: fill;
+  }
+  .order-info{
+    color: $font;
+    margin: 0;
+    padding: 0;
+    width: 33%;
+  }
+  .status{
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $font;
+    p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+//order-detail
+.client-link{
+  cursor: pointer;
 }

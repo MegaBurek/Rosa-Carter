@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/index';
 import {Product} from '../../model/product';
 import {Select} from '@ngxs/store';
 import {ProductsState} from '../../store/products/products.state';
+import {ShoppingCartService} from '../../services/shoppingCart/shopping-cart.service';
 
 @Component({
   selector: 'app-sets-list',
@@ -16,10 +17,16 @@ export class SetsListComponent implements OnInit {
 
   @Select(ProductsState.getSets) products: Observable<Product[]>;
 
-  constructor() {
+  constructor(
+    private shoppingCartService: ShoppingCartService
+  ) {
   }
 
   ngOnInit(): void {
+  }
+
+  addToCart(product) {
+    this.shoppingCartService.addToCart(product);
   }
 
 }

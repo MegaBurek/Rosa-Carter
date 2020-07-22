@@ -1,6 +1,10 @@
+import {ShoppingCartItem} from './shopping-cart-item';
+
 export class Order {
-    id: string;
-    name: string;
-    type: string;
-    order_date: Date;
+  uid: string;
+  shoppingCartItems: ShoppingCartItem[];
+  dateOrdered: Date;
+  owner: string;
+  ownerName: string;
+  status: string;
 }

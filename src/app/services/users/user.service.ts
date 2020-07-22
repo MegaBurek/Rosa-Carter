@@ -62,12 +62,7 @@ export class UserService {
     });
   }
 
-  getUsers() {
-    this.userCollection = this.db.collection('users');
-    return this.userCollection.valueChanges();
-  }
-
-  getUser(id: string) {
+  getUserById(id: string) {
     return this.db.doc('users/' + id).snapshotChanges();
   }
 }

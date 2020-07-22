@@ -7,6 +7,13 @@ export class GetShoppingCart {
   }
 }
 
+export class EmptyShoppingCart {
+  static readonly type = '[ShopCart API] Empty Shopping Cart';
+
+  constructor() {
+  }
+}
+
 export class SetSelectedShoppingCartItem {
   static readonly type = '[ShopCart API] Set Selected Shopping Cart Item';
 

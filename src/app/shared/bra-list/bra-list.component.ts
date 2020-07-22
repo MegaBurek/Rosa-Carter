@@ -8,6 +8,7 @@ import {ProductsState} from '../../store/products/products.state';
 import {ShoppingCartState} from '../../store/shoppingCart/shoppingCart.state';
 import {ToastrService} from 'ngx-toastr';
 import {ShoppingCartItem} from '../../model/shopping-cart-item';
+import {ShoppingCartService} from '../../services/shoppingCart/shopping-cart.service';
 
 @Component({
   selector: 'app-bra-list',
@@ -22,11 +23,16 @@ export class BraListComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private shoppingCartService: ShoppingCartService
   ) {
   }
 
   ngOnInit(): void {
+  }
+
+  addToCart(product) {
+    this.shoppingCartService.addToCart(product);
   }
 
 }

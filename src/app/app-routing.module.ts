@@ -16,6 +16,8 @@ import {SetsListComponent} from './shared/sets-list/sets-list.component';
 import {ProductDetailComponent} from './shared/product-detail/product-detail.component';
 import {CustomPreloadingStrategy} from './custom-preload-route';
 import {CartComponent} from './cart/cart.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {OrderDetailComponent} from './order-detail/order-detail.component';
 
 
 const routes: Routes = [
@@ -30,10 +32,15 @@ const routes: Routes = [
   {path: 'addProduct', component: AddProductComponent, canActivate: [AuthGuard]},
   {path: 'product/:uid', component: ProductDetailComponent, data: {preload: true}, canActivate: [AuthGuard]},
   {path: 'currentOrders', component: OrderListComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {path: 'order/:uid', component: OrderDetailComponent, data: {preload: true}, canActivate: [AuthGuard]},
   {path: 'bras', component: BraListComponent, data: {preload: true}, canActivate: [AuthGuard]},
   {path: 'undies', component: UndiesListComponent, data: {preload: true}, canActivate: [AuthGuard]},
   {path: 'sets', component: SetsListComponent, data: {preload: true}, canActivate: [AuthGuard]},
-  {path: 'cart', component: CartComponent, data: {preload: true}, canActivate: [AuthGuard]}
+  {path: 'cart', component: CartComponent, data: {preload: true}, canActivate: [AuthGuard]},
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

@@ -1,6 +1,12 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {AddToShoppingCart, EditSelectedShoppingCartItem, RemoveFromShoppingCart, SetSelectedShoppingCartItem} from './shoppingCart.actions';
+import {
+  AddToShoppingCart,
+  EditSelectedShoppingCartItem,
+  EmptyShoppingCart,
+  RemoveFromShoppingCart,
+  SetSelectedShoppingCartItem
+} from './shoppingCart.actions';
 import {ShoppingCartService} from '../../services/shoppingCart/shopping-cart.service';
 import {ShoppingCartItem} from '../../model/shopping-cart-item';
 
@@ -70,6 +76,14 @@ export class ShoppingCartState {
         shoppingCart: state.shoppingCart.filter((item, index) => index !== id)
       }
     );
+  }
+
+  @Action(EmptyShoppingCart)
+  emptyShoppingCart({getState, patchState}: StateContext<ShoppingCartStateModel>) {
+    const state = getState();
+    patchState({
+      shoppingCart: []
+    });
   }
 
 

@@ -2,7 +2,7 @@
   <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">New Arrivals</h5>
   <hr class="divider-main" style='margin-top: 0;'>
   <div class="shop-item" *ngFor="let product of products|async">
-    <img [src]="product.imageUrl" class="shop-item-img">
+    <img [src]="product.imageUrl" class="shop-item-img" routerLink="/product/{{product.uid}}">
     <div class="desc-box">
       <div class="info">
         <h3 class="shop-item-text">{{product.name}}</h3>
