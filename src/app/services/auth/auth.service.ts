@@ -8,6 +8,7 @@ import {ToastrService} from 'ngx-toastr';
 import {Store} from '@ngxs/store';
 import {GetAllBras, GetLatestProducts} from '../../store/products/products.actions';
 import {Observable} from 'rxjs';
+import {UserState} from '../../store/user/user.state';
 
 @Injectable()
 export class AuthService {
@@ -58,6 +59,18 @@ export class AuthService {
           resolve(res);
         }, err => reject(err));
     });
+  }
+
+  isAdminLogged(){
+    let role = '';
+    this.store.select(state => state.user.loggedInUser.role).subscribe((value) => {
+      role = value;
+    });
+    if (role === 'admin') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   doLogout() {

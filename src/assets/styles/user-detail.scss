@@ -79,4 +79,17 @@ p{
 //order-detail
 .client-link{
   cursor: pointer;
+  &:hover{
+    text-shadow: 0 0 5px $font;
+  }
+}
+
+.preview-orders{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }

@@ -1,13 +1,24 @@
 <div class="cart-layout container">
   <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">Order</h5>
-  <p class="user-info client-link">
+  <div class="preview-orders">
+    <img class="img-product" *ngFor="let item of order.shoppingCartItems" [src]="item.product.imageUrl" (click)="openProductModal(item.product.uid, item.product)">
+  </div>
+  <p class="user-info client-link" (click)="toUserProfile(order.owner)">
     💃🏻 <b>Client:</b> {{order.ownerName}}
   </p>
-  <p class="user-info">
-    💃🏻 <b>Client:</b>
-    <br/>
+  <p class="user-info" [ngClass]="{'client-link': isAdminLogged()}" (click)="openStatusModal('status-modal')">
     📢 <b>Status:</b> {{order.status}}
     <br/>
   </p>
   <button class="btn btn-lg btn-block text-uppercase">Download PDF</button>
 </div>
+<jw-modal id="product-modal">
+  <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">{{shoppingItem.name}}</h5>
+  <img class="shop-item-img" [src]="shoppingItem.imageUrl">
+  <p class="edit-shop-info text-center">
+    Measurements
+  </p>
+  <div>
+    <button class="btn btn-block text-uppercase button" (click)="closeProductModal('product-modal');">Close</button>
+  </div>
+</jw-modal>
