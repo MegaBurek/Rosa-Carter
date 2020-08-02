@@ -31,7 +31,7 @@ export class GetSelectedShoppingCartItem {
 export class EditSelectedShoppingCartItem {
   static readonly type = '[ShopCart API] Edit Selected Shopping Cart Item';
 
-  constructor(public shoppingCartItemIndex: number, public shoppingCartItem: ShoppingCartItem) {
+  constructor(public shoppingCartItem: ShoppingCartItem) {
 
   }
 }

@@ -34,5 +34,9 @@ export class ShoppingCartService {
     this.toastr.success('You have removed from your cart', 'Notification');
   }
 
+  editCartItem(shoppingCartItem) {
+
+  }
+
 
 }

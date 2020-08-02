@@ -5,7 +5,12 @@ import {ShoppingCartService} from '../services/shoppingCart/shopping-cart.servic
 import {ShoppingCartState} from '../store/shoppingCart/shoppingCart.state';
 import {Observable} from 'rxjs';
 import {ShoppingCartItem} from '../model/shopping-cart-item';
-import {EmptyShoppingCart, RemoveFromShoppingCart, SetSelectedShoppingCartItem} from '../store/shoppingCart/shoppingCart.actions';
+import {
+  EditSelectedShoppingCartItem,
+  EmptyShoppingCart,
+  RemoveFromShoppingCart,
+  SetSelectedShoppingCartItem
+} from '../store/shoppingCart/shoppingCart.actions';
 import {fadeInAnimation} from '../_animations';
 import {ModalService} from '../_modal';
 import {Order} from '../model/order.model';
@@ -27,6 +32,7 @@ export class CartComponent implements OnInit {
   shoppingCartIndex;
   shoppingCartItems: ShoppingCartItem[];
   public shoppingCartItem;
+  public shoppingCartItemQty;
 
   constructor(
     private store: Store,
@@ -51,11 +57,23 @@ export class CartComponent implements OnInit {
   openEditModal(id: string, shoppingCartItem, shoppingCartIndex) {
     this.shoppingCartIndex = shoppingCartIndex;
     this.shoppingCartItem = shoppingCartItem;
+    this.shoppingCartItemQty = shoppingCartItem.quantity;
     this.modalService.open(id);
   }
 
   openCheckoutModal(id: string) {
     this.modalService.open(id);
+  }
+
+  incrementQuantity() {
+    this.shoppingCartItemQty = this.shoppingCartItemQty + 1;
+  }
+
+  decrementQuantity() {
+    if (this.shoppingCartItemQty === 0) {
+      return;
+    }
+    this.shoppingCartItemQty = this.shoppingCartItemQty - 1;
   }
 
   updateEdit(shoppingCartItem) {
@@ -91,6 +109,11 @@ export class CartComponent implements OnInit {
       order.ownerName = user.name;
     });
     this.store.dispatch(new CreateOrder(order));
+  }
+
+  confirmEditShoppingCartItem() {
+    this.store.dispatch(new EditSelectedShoppingCartItem(this.shoppingCartItem));
+    this.modalService.close('edit-item-modal');
   }
 
 

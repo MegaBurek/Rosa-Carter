@@ -9,6 +9,7 @@ import {
 } from './shoppingCart.actions';
 import {ShoppingCartService} from '../../services/shoppingCart/shopping-cart.service';
 import {ShoppingCartItem} from '../../model/shopping-cart-item';
+import {patch, updateItem} from '@ngxs/store/operators';
 
 export class ShoppingCartStateModel {
   shoppingCart: ShoppingCartItem[];
@@ -55,10 +56,12 @@ export class ShoppingCartState {
   }
 
   @Action(EditSelectedShoppingCartItem)
-  editSelectedShoppingCartItem({getState, setState}: StateContext<ShoppingCartStateModel>, {shoppingCartItemIndex, shoppingCartItem}: EditSelectedShoppingCartItem) {
-    const state = getState();
-    const shoppingCart = state.shoppingCart;
-
+  editSelectedShoppingCartItem(ctx: StateContext<ShoppingCartStateModel>, {shoppingCartItem}: EditSelectedShoppingCartItem) {
+    ctx.setState(
+      patch({
+        shoppingCart: updateItem(item => item.product.uid === shoppingCartItem.product.uid, patch({quantity: shoppingCartItem.quantity}))
+      })
+    );
   }
 
   @Action(AddToShoppingCart)

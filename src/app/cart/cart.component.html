@@ -31,12 +31,12 @@
   </div>
   <p class="edit-shop-info text-center">Quantity</p>
   <div class="quantity-picker-layout">
-    <img src="../../assets/icons/icons8-minus-96.png" class="add-to-cart-icon">
-    <p class="quantity">{{shoppingCartItem.quantity}}</p>
-    <img src="../../assets/icons/icons8-plus-math-90.png" class="add-to-cart-icon">
+    <img src="../../assets/icons/icons8-minus-96.png" class="add-to-cart-icon" (click)="decrementQuantity()">
+    <p class="quantity">{{shoppingCartItemQty}}</p>
+    <img src="../../assets/icons/icons8-plus-math-90.png" class="add-to-cart-icon" (click)="incrementQuantity()">
   </div>
   <div>
-    <button class="btn btn-block text-uppercase button" (click)="confirmOrder()">Confirm</button>
+    <button class="btn btn-block text-uppercase button" (click)="confirmEditShoppingCartItem()">Confirm</button>
     <button class="btn btn-block text-uppercase button" (click)="closeModal('edit-item-modal');">Close</button>
   </div>
 </jw-modal>
