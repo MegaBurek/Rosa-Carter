@@ -56,12 +56,15 @@ export class ShoppingCartState {
   }
 
   @Action(EditSelectedShoppingCartItem)
-  editSelectedShoppingCartItem(ctx: StateContext<ShoppingCartStateModel>, {shoppingCartItem}: EditSelectedShoppingCartItem) {
-    ctx.setState(
-      patch({
-        shoppingCart: updateItem(item => item.product.uid === shoppingCartItem.product.uid, patch({quantity: shoppingCartItem.quantity}))
-      })
-    );
+  editSelectedShoppingCartItem({getState, setState}: StateContext<ShoppingCartStateModel>, action: EditSelectedShoppingCartItem) {
+    const state = getState();
+    const shoppingCartList = [...state.shoppingCart];
+    const shoppingCartItemIndex = shoppingCartList.findIndex(item => item.product.uid === action.shoppingCartItem.product.uid);
+    shoppingCartList[shoppingCartItemIndex] = action.shoppingCartItem;
+    setState({
+      ...state,
+      shoppingCart: shoppingCartList
+    });
   }
 
   @Action(AddToShoppingCart)

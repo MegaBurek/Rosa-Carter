@@ -70,10 +70,9 @@ export class CartComponent implements OnInit {
   }
 
   decrementQuantity() {
-    if (this.shoppingCartItemQty === 0) {
-      return;
+    if (this.shoppingCartItemQty > 1) {
+      this.shoppingCartItemQty = Math.max(this.shoppingCartItemQty - 1, 0);
     }
-    this.shoppingCartItemQty = this.shoppingCartItemQty - 1;
   }
 
   updateEdit(shoppingCartItem) {
@@ -91,7 +90,7 @@ export class CartComponent implements OnInit {
       console.error(error);
     });
     for (const item of this.shoppingCartItems) {
-      totalValue += parseInt(item.product.price, 10);
+      totalValue += (parseInt(item.product.price, 10) * item.quantity);
     }
     return totalValue;
   }
@@ -112,6 +111,7 @@ export class CartComponent implements OnInit {
   }
 
   confirmEditShoppingCartItem() {
+    this.shoppingCartItem.quantity = this.shoppingCartItemQty;
     this.store.dispatch(new EditSelectedShoppingCartItem(this.shoppingCartItem));
     this.modalService.close('edit-item-modal');
   }

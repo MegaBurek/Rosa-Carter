@@ -4,18 +4,19 @@ import {Select, Store} from '@ngxs/store';
 import {ShoppingCartItem} from '../../model/shopping-cart-item';
 import {AddToShoppingCart, RemoveFromShoppingCart} from '../../store/shoppingCart/shoppingCart.actions';
 import {EmitterService} from '@ngxs-labs/emitter';
+import {Observable} from 'rxjs';
+import {ShoppingCartState} from '../../store/shoppingCart/shoppingCart.state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  cartSize: number;
+  @Select(ShoppingCartState.getCartSize) cartSize;
 
   constructor(
     private toastr: ToastrService,
-    private store: Store,
-    private emitter: EmitterService
+    private store: Store
   ) {
   }
 
