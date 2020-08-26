@@ -34,22 +34,22 @@ export class AuthService {
     });
   }
 
-  UpdateUserData(user, userInfo) {
-    const userRef: AngularFirestoreDocument<any> = this.db.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      imageUrl: userInfo.imageUrl,
-      displayName: userInfo.displayName,
-      role: userInfo.role,
-      name: userInfo.name,
-      surname: userInfo.surname,
-      dob: userInfo.dob,
-      orders: [],
-      emailVerified: user.emailVerified,
-    };
-    return userRef.update(userData);
-  }
+  // UpdateUserData(user, userInfo) {
+  //   const userRef: AngularFirestoreDocument<any> = this.db.doc(`users/${user.uid}`);
+  //   const userData: User = {
+  //     uid: user.uid,
+  //     email: user.email,
+  //     imageUrl: userInfo.imageUrl,
+  //     displayName: userInfo.displayName,
+  //     role: userInfo.role,
+  //     name: userInfo.name,
+  //     surname: userInfo.surname,
+  //     dob: userInfo.dob,
+  //     orders: [],
+  //     emailVerified: user.emailVerified,
+  //   };
+  //   return userRef.update(userData);
+  // }
 
   doLogin(value) {
     return new Promise<any>((resolve, reject) => {

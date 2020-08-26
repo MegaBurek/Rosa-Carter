@@ -1,43 +1,50 @@
 <div class="card card-userinput mr-auto ml-auto">
-    <div class="card-body">
-        <h5 class="card-title text-center">Show us who YOU are</h5>
-        <form class="form-signin">
-            <div class="dflex flex-row">
-                <label style="width: 50%">Display Photo</label>
-                <label style="width: 50%" *ngIf="check">✔</label>
-            </div>
-            <div class="form-label-group">
-                <input type="file" id="file"
-                    accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
-                <label for="file" class="btn-2">Click to upload 📁</label>
-            </div>
+  <div class="card-body">
+    <h5 class="card-title text-center">Show us who YOU are</h5>
+    <form class="form-signin">
+      <div class="dflex flex-row">
+        <label style="width: 50%">Display Photo</label>
+        <label style="width: 50%" *ngIf="check">✔</label>
+      </div>
+      <div class="form-label-group">
+        <input type="file" id="file"
+               accept="image/jpeg,image/png,.jpeg,.jpg,.png" (change)="onFileSelected($event)"/>
+        <label for="file" class="btn-2">Click to upload 📁</label>
+      </div>
 
-            <label>Display Name</label>
-            <div class="form-label-group">
-                <input class="form-control form-control-lg"  name="display_name" [(ngModel)]="newUser.displayName" type="text" required>
-            </div>
+      <label>Display Name</label>
+      <div class="form-label-group">
+        <input class="form-control form-control-lg" name="display_name" [(ngModel)]="newUser.displayName" type="text"
+               required>
+      </div>
 
-            <label>Name</label>
-            <div class="form-label-group">
-                <input class="form-control form-control-lg"  name="name" [(ngModel)]="newUser.name" type="text">
-            </div>
+      <label>Phone Number</label>
+      <div class="form-label-group">
+        <input class="form-control form-control-lg" name="phoneNumber" [(ngModel)]="newUser.phoneNumber" type="text"
+               required>
+      </div>
 
-            <label>Surname</label>
-            <div class="form-label-group">
-                <input class="form-control form-control-lg"  name="surname" [(ngModel)]="newUser.surname" type="text" required>
-            </div>
+      <label>Name</label>
+      <div class="form-label-group">
+        <input class="form-control form-control-lg" name="name" [(ngModel)]="newUser.name" type="text">
+      </div>
 
-            <label>Date of Birth</label>
-            <div class="form-label-group">
-                <input class="form-control form-control-lg"  name="dob" type="date" [(ngModel)]="newUser.dob" required
-                    style="margin-bottom: 10px;">
-            </div>
+      <label>Surname</label>
+      <div class="form-label-group">
+        <input class="form-control form-control-lg" name="surname" [(ngModel)]="newUser.surname" type="text" required>
+      </div>
 
-            <button class="btn btn-lg btn-block text-uppercase" (click)="tryRegister()">PROCEED</button>
-            <hr class="divider">
-            <blockquote class="message">
-                We're glad to have you on board 🖤
-            </blockquote>
-        </form>
-    </div>
+      <label>Date of Birth</label>
+      <div class="form-label-group">
+        <input class="form-control form-control-lg" name="dob" type="date" [(ngModel)]="newUser.dob" required
+               style="margin-bottom: 10px;">
+      </div>
+
+      <button class="btn btn-lg btn-block text-uppercase" (click)="tryRegister()">PROCEED</button>
+      <hr class="divider">
+      <blockquote class="message">
+        We're glad to have you on board 🖤
+      </blockquote>
+    </form>
+  </div>
 </div>

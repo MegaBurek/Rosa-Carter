@@ -6,9 +6,6 @@ import {ToastrService} from 'ngx-toastr';
 import {ImageUtilService} from 'src/app/services/util/image-util.service';
 import {fadeInAnimation} from '../../_animations/fade-in.animation';
 import {User} from '../../model/user.model';
-import {Observable} from 'rxjs';
-import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
-import {finalize, tap} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
@@ -30,6 +27,7 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
     email: '',
     imageUrl: '',
     displayName: '',
+    phoneNumber: '',
     role: 'user',
     name: '',
     surname: '',
@@ -72,6 +70,14 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
       this.toastr.error('Please enter a display name', 'Notification', {
         timeOut: 1700
       });
+    } else if (this.newUser.phoneNumber === '') {
+      this.toastr.error('Please enter a phone number', 'Notification', {
+        timeOut: 1700
+      });
+    } else if (parseInt(this.newUser.phoneNumber.valueOf(), 10) < 8) {
+      this.toastr.error('Please enter a valid phone number', 'Notification', {
+        timeOut: 1700
+      });
     } else if (this.newUser.name === '') {
       this.toastr.error('Please enter your name', 'Notification', {
         timeOut: 1700
@@ -87,6 +93,8 @@ export class AccountCompletionComponent implements OnInit, OnDestroy {
     } else {
       const email = localStorage.getItem('email');
       const password = localStorage.getItem('password');
+
+      this.newUser.phoneNumber = '+267' + this.newUser.phoneNumber;
 
       const file: File = inputNode.files[0];
       const n = Date.now();

@@ -11,7 +11,7 @@ export class UserStateModel {
   name: 'user',
   defaults: {
     loggedInUser: {
-      uid: null, email: null, imageUrl: null, displayName: null, role: null, name: null, surname: null, dob: null
+      uid: null, email: null, imageUrl: null, displayName: null, phoneNumber: null, role: null, name: null, surname: null, dob: null
       , orders: null, emailVerified: null
     }
   }
