@@ -3,14 +3,27 @@
   <img class="user-detail-profile-photo" [src]="user.imageUrl" style="margin-bottom: 10px;">
 
   <p class="user-info">
-    <span class="glyphicon glyphicon-envelope"></span>📧 <b>Email</b>: {{user.email}}
-    <br/>
-    <span class="glyphicon glyphicon-user"></span>📛 <b>Fullname</b>: {{user.name}} {{user.surname}}
-    <br/>
-    <span class="glyphicon glyphicon-gift"></span>🎁 <b>Date of Birth</b>: {{user.dob}}
+    <span class="glyphicon glyphicon-envelope"></span>📧 <b>Email</b>
   </p>
-  <button class="btn btn-lg btn-block text-uppercase" routerLink="/editProfile">Edit profile</button>
-  <button class="btn btn-lg btn-block text-uppercase" style="margin-bottom: 10px;">Change password</button>
+  <p class="user-info">
+    {{user.email}}
+  </p>
+    <br/>
+  <p class="user-info">
+    <span class="glyphicon glyphicon-user"></span>📛 <b>Fullname</b>
+  </p>
+  <p class="user-info">
+    {{user.name}} {{user.surname}}
+  </p>
+    <br/>
+  <p class="user-info">
+    <span class="glyphicon glyphicon-gift"></span>🎁 <b>Date of Birth</b>
+  </p>
+  <p class="user-info">
+     {{user.dob}}
+  </p>
+  <button class="btn btn-lg btn-block text-uppercase button" routerLink="/editProfile">Edit profile</button>
+  <button class="btn btn-lg btn-block text-uppercase button" style="margin-bottom: 10px;">Change password</button>
   <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">My Orders</h5>
   <hr class="divider-main" style='margin-top: 0;'>
   <ul class="my-orders">

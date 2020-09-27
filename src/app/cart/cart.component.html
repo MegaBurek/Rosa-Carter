@@ -35,16 +35,12 @@
     <p class="quantity">{{shoppingCartItemQty}}</p>
     <img src="../../assets/icons/icons8-plus-math-90.png" class="add-to-cart-icon" (click)="incrementQuantity()">
   </div>
-  <div>
-    <button class="btn btn-block text-uppercase button" (click)="confirmEditShoppingCartItem()">Confirm</button>
-    <button class="btn btn-block text-uppercase button" (click)="closeModal('edit-item-modal');">Close</button>
-  </div>
+  <button class="btn btn-block text-uppercase button" (click)="confirmEditShoppingCartItem()">Confirm</button>
+  <button class="btn btn-block text-uppercase button" (click)="closeModal('edit-item-modal');">Close</button>
 </jw-modal>
 <jw-modal id="checkout-modal">
   <h5 class="card-title text-center" style="color:#f7f7f2;margin-bottom: 0;">Checkout</h5>
   <p class="edit-shop-info text-center">You will be notified when your orders are ready for collection or delivery</p>
-  <div>
-    <button class="btn btn-block text-uppercase button" (click)="confirmOrder()">Confirm</button>
-    <button class="btn btn-block text-uppercase button" (click)="closeModal('checkout-modal');">Close</button>
-  </div>
+  <button class="btn btn-block text-uppercase button" (click)="confirmOrder()">Confirm</button>
+  <button class="btn btn-block text-uppercase button" (click)="closeModal('checkout-modal');">Close</button>
 </jw-modal>

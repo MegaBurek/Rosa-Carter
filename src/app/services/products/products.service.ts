@@ -40,7 +40,7 @@ export class ProductsService {
 
   deleteProduct(id) {
     return this.db.collection('products').doc(id).delete().then(() => {
-      this.toastr.success('Succesfully removed the product', 'Notification');
+      this.toastr.success('Successfully removed the product', 'Notification');
       this.router.navigate(['/dashboard']);
     }).catch(e => {
       this.toastr.error('Error with removing product', 'Notification');

@@ -108,6 +108,8 @@ export class CartComponent implements OnInit {
       order.ownerName = user.name;
     });
     this.store.dispatch(new CreateOrder(order));
+    this.toastr.success('You have successfully placed your order', 'Notification');
+    this.modalService.close('checkout-modal');
   }
 
   confirmEditShoppingCartItem() {

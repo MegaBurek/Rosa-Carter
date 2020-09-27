@@ -52,9 +52,7 @@ export class OrdersState {
         patchState({
           myOrders: [...state.myOrders, order]
         });
-        this.toastr.success('You have successfully placed your order', 'Notification');
         this.store.dispatch(new EmptyShoppingCart());
-        this.modalService.close('checkout-modal');
       });
     })
       .catch((error) => {

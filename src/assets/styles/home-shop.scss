@@ -7,6 +7,9 @@
   justify-content: space-around;
   align-content: center;
   align-items: center;
+  @media (min-device-width: 480px) {
+    justify-content: center;
+  }
 }
 
 .directional-arrow {

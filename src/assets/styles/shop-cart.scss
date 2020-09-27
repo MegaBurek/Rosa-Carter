@@ -45,6 +45,7 @@
 }
 
 .product-info {
+  margin-top: 0.5em;
   font-family: "subFont";
   margin: 0;
   color: $font;
@@ -89,17 +90,16 @@
   align-items: center;
 }
 
-.info-layout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .checkout-layout{
   position: fixed;
   bottom: 0%;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .edit-shop-item-img{

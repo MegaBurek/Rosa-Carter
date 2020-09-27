@@ -25,6 +25,10 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isAdminLogged() {
+    return this.authService.isAdminLogged();
+  }
+
   loggedInUserID() {
     return this.authService.getLoggedInID();
   }
@@ -38,13 +42,14 @@ export class NavigationBarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.doLogout();
-    localStorage.removeItem('uid');
-    localStorage.removeItem('@@STATE');
-    this.toastr.success('Your have logged out', 'Notification', {
-      timeOut: 1700
+    this.authService.doLogout().then((res) => {
+      localStorage.removeItem('uid');
+      localStorage.removeItem('@@STATE');
+      this.toastr.success('Your have logged out', 'Notification', {
+        timeOut: 1700
+      });
+      this.router.navigate(['/login']);
     });
-    this.router.navigate(['/login']);
 
   }
 

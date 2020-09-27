@@ -18,8 +18,9 @@
 
 .action-box{
   margin-top: 0.7rem;
+  height: 100px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
