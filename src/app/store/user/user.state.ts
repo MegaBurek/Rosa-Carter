@@ -1,7 +1,7 @@
-import {User} from '../../model/user.model';
-import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {Injectable} from '@angular/core';
-import {SetLoggedInUser} from './user.actions';
+import { User } from '../../model/user.model';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import { SetLoggedInUser } from './user.actions';
 
 export class UserStateModel {
   loggedInUser: User;
@@ -11,8 +11,17 @@ export class UserStateModel {
   name: 'user',
   defaults: {
     loggedInUser: {
-      uid: null, email: null, imageUrl: null, displayName: null, phoneNumber: null, role: null, name: null, surname: null, dob: null
-      , orders: null, emailVerified: null
+      uid: null,
+      email: null,
+      imageUrl: null,
+      displayName: null,
+      phoneNumber: null,
+      role: null,
+      name: null,
+      surname: null,
+      dob: null,
+      orders: null,
+      emailVerified: null
     }
   }
 })
@@ -27,10 +36,8 @@ export class UserState {
   }
 
   @Action(SetLoggedInUser)
-  setLoggedInUser({getState, patchState}: StateContext<UserStateModel>, {user}: SetLoggedInUser) {
-    const state = getState();
-    patchState({
-      loggedInUser: user
-    });
+  setLoggedInUser(ctx: StateContext<UserStateModel>, {user}: SetLoggedInUser) {
+    const state = ctx.getState();
+    ctx.setState({...state, loggedInUser: user});
   }
 }

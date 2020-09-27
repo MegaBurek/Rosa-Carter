@@ -70,18 +70,21 @@ export class LoginComponent implements OnInit {
 
   setLoggedInUser(id) {
     const user: User = new User();
-    this.db.collection('users').doc(id).snapshotChanges().subscribe(actionArray => {
+    this.userService.getUserById(id).subscribe(actionArray => {
       user.uid = actionArray.payload.get('uid');
       user.email = actionArray.payload.get('email');
-      user.displayName = actionArray.payload.get('displayName');
       user.imageUrl = actionArray.payload.get('imageUrl');
-      user.orders = actionArray.payload.get('orders');
-      user.emailVerified = actionArray.payload.get('emailVerified');
+      user.displayName = actionArray.payload.get('imageUrl');
+      user.phoneNumber = actionArray.payload.get('phoneNumber');
       user.role = actionArray.payload.get('role');
       user.name = actionArray.payload.get('name');
       user.surname = actionArray.payload.get('surname');
+      user.dob = actionArray.payload.get('dob');
+      user.orders = actionArray.payload.get('orders');
+      user.emailVerified = actionArray.payload.get('emailVerified');
+
+      this.store.dispatch(new SetLoggedInUser(user));
     });
-    this.store.dispatch(new SetLoggedInUser(user));
   }
 
   roleCheck() {

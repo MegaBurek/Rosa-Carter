@@ -56,7 +56,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   isAdminLogged() {
-    this.authSerice.isAdminLogged();
+    return this.authSerice.isAdminLogged();
   }
 
   nextSlide() {
