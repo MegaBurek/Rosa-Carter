@@ -1,12 +1,14 @@
 .card-userinput {
-	width: 95%;
+	width: 328px;
 	border: 0;
 	border-radius: 1rem;
 	box-shadow: 0px 0px 5px #fff;
 	margin-top: 3rem;
 	background-color: $component;
 	margin-bottom: 20px;
-
+  @media (min-device-width: 480px){
+    width: 500px;
+  }
 }
 
 .card-subtitle {

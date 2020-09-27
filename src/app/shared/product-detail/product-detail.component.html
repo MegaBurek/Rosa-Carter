@@ -42,5 +42,6 @@
   <h5 class="product-detail-price text-center" style="color:#f7f7f2;margin-bottom: 0;">P{{product.price}}.00</h5>
   <div class="action-box">
     <img src="../../../assets/icons/icons8-favorite-cart-48.png" class="add-to-cart">
+    <button class="btn btn-lg btn-block text-uppercase" *ngIf="isAdminLogged()" (click)="removeProduct(product.id)">Delete</button>
   </div>
 </div>

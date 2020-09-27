@@ -1,3 +1,5 @@
+@import "./breakpoints.scss";
+
 .new-member-container {
   height: 90px;
   background-color: $component;
@@ -9,14 +11,27 @@
 }
 
 .new-member {
-  width: 55px;
-  height: 55px;
-  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+  &:hover{
+    .img-member{
+      box-shadow: 0px 0px 13px $background;
+    }
+  }
 }
 
 .img-member {
   border-radius: 1rem;
-  width: 100%;
+  width: 55px;
+  height: 55px;
+  @media (min-device-width: 480px){
+    width: 80px;
+    height: 80px;
+  }
   box-shadow: 0px 0px 5px $background;
 }
 

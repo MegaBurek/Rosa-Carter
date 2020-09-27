@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore} from '@angular/fire/firestore';
-import {Product} from 'src/app/model/product';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { Product } from 'src/app/model/product';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import Timestamp = firebase.firestore.Timestamp;
 import firebase from 'firebase';
 
@@ -36,6 +36,16 @@ export class ProductsService {
 
   getProductById(id) {
     return this.db.collection('products').doc(id).get();
+  }
+
+  deleteProduct(id) {
+    return this.db.collection('products').doc(id).delete().then(() => {
+      this.toastr.success('Succesfully removed the product', 'Notification');
+      this.router.navigate(['/dashboard']);
+    }).catch(e => {
+      this.toastr.error('Error with removing product', 'Notification');
+      console.error('Error removing document: ', e.message);
+    });
   }
 
   getAllBras() {

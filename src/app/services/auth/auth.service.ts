@@ -1,14 +1,14 @@
-import {Injectable, NgZone} from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
+import { Injectable, NgZone } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
-import {User} from 'src/app/model/user.model';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Store} from '@ngxs/store';
-import {GetAllBras, GetLatestProducts} from '../../store/products/products.actions';
-import {Observable} from 'rxjs';
-import {UserState} from '../../store/user/user.state';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from 'src/app/model/user.model';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngxs/store';
+import { GetAllBras, GetLatestProducts } from '../../store/products/products.actions';
+import { Observable } from 'rxjs';
+import { UserState } from '../../store/user/user.state';
 
 @Injectable()
 export class AuthService {
@@ -61,7 +61,7 @@ export class AuthService {
     });
   }
 
-  isAdminLogged(){
+  isAdminLogged() {
     let role = '';
     this.store.select(state => state.user.loggedInUser.role).subscribe((value) => {
       role = value;

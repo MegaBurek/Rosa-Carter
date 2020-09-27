@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {fadeInAnimation} from '../../_animations/fade-in.animation';
-import {ProductsService} from '../../services/products/products.service';
-import {ActivatedRoute} from '@angular/router';
-import {NgImageSliderComponent} from 'ng-image-slider';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { fadeInAnimation } from '../../_animations/fade-in.animation';
+import { ProductsService } from '../../services/products/products.service';
+import { ActivatedRoute } from '@angular/router';
+import { NgImageSliderComponent } from 'ng-image-slider';
+import { AuthService } from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -30,7 +31,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authSerice: AuthService
   ) {
     const id = this.activatedRoute.snapshot.params.uid;
     this.productsService.getProductById(id).subscribe((docRef) => {
@@ -44,9 +46,18 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  removeProduct(id) {
+    this.productsService.deleteProduct(id).then(() => {
+      console.log('Success');
+    });
+  }
+
   ngOnInit(): void {
   }
 
+  isAdminLogged() {
+    this.authSerice.isAdminLogged();
+  }
 
   nextSlide() {
     this.slider.next();
