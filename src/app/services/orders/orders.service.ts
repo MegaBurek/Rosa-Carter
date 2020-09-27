@@ -23,7 +23,7 @@ export class OrdersService {
     return this.ordersCollection.valueChanges();
   }
 
-  getOrderById(id) {
-    return this.db.collection('orders').doc(id).get();
+  getOrderById(id: string) {
+    return this.db.doc('orders/' + id).snapshotChanges();
   }
 }

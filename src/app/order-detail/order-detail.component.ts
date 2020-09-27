@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {OrdersService} from '../services/orders/orders.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../services/users/user.service';
-import {User} from '../model/user.model';
-import {ModalService} from '../_modal';
-import {AuthService} from '../services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { OrdersService } from '../services/orders/orders.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../services/users/user.service';
+import { User } from '../model/user.model';
+import { ModalService } from '../_modal';
+import { AuthService } from '../services/auth/auth.service';
+import { Order } from "../model/order.model";
 
 @Component({
   selector: 'app-order-detail',
@@ -13,7 +14,7 @@ import {AuthService} from '../services/auth/auth.service';
 })
 export class OrderDetailComponent implements OnInit {
 
-  order: any;
+  order: Order = new Order();
   shoppingItems: [];
   shoppingItem: any;
 
@@ -25,8 +26,14 @@ export class OrderDetailComponent implements OnInit {
     private authService: AuthService
   ) {
     const id = this.activatedRoute.snapshot.params.uid;
-    this.ordersService.getOrderById(id).subscribe((docRef) => {
-      this.order = docRef.data();
+    this.ordersService.getOrderById(id).subscribe(actionArray => {
+      this.order.uid = actionArray.payload.get('uid');
+      this.order.ownerName = actionArray.payload.get('ownerName');
+      this.order.owner = actionArray.payload.get('owner');
+      this.order.dateOrdered = actionArray.payload.get('dateOrdered');
+      this.order.shoppingCartItems = actionArray.payload.get('shoppingCartItems');
+      this.order.status = actionArray.payload.get('status');
+      console.log(this.order.shoppingCartItems)
     });
   }
 

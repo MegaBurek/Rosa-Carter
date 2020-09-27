@@ -66,7 +66,6 @@ export class AuthService {
     this.store.select(state => state.user.loggedInUser.role).subscribe((value) => {
       role = value;
     });
-    console.log(role);
     if (role === 'admin') {
       return true;
     } else {

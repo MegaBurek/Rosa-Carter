@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {User} from '../model/user.model';
-import {UserService} from '../services/users/user.service';
-import {AngularFireStorage} from '@angular/fire/storage';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {fadeInAnimation} from '../_animations/fade-in.animation';
-import {ActivatedRoute} from '@angular/router';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {OrdersState} from '../store/orders/orders.state';
-import {Order} from '../model/order.model';
-import {Observable} from 'rxjs';
-import {Select} from '@ngxs/store';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../model/user.model';
+import { UserService } from '../services/users/user.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { fadeInAnimation } from '../_animations/fade-in.animation';
+import { ActivatedRoute } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { OrdersState } from '../store/orders/orders.state';
+import { Order } from '../model/order.model';
+import { Observable } from 'rxjs';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-user-detail',
@@ -22,7 +22,7 @@ export class UserDetailComponent implements OnInit {
 
   @Select(OrdersState.getMyOrders) myOrders: Observable<Order[]>;
 
-  user: User = new User;
+  user: User = new User();
   edit: false;
   editForm: FormGroup;
 
