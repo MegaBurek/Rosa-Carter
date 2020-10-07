@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Order} from '../../model/order.model';
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Order } from '../../model/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,11 @@ export class OrdersService {
 
   getMyOrders(id) {
     this.ordersCollection = this.db.collection('orders', ref => ref.where('owner', '==', id));
+    return this.ordersCollection.valueChanges();
+  }
+
+  getAllOrders() {
+    this.ordersCollection = this.db.collection('orders');
     return this.ordersCollection.valueChanges();
   }
 
